@@ -1,3 +1,7 @@
+:root {
+    --backgroundColor: #0B4F6C;
+}
+
 body {
     background-color: var(--backgroundColor);
     color: white;
@@ -10,20 +14,19 @@ main {
 }
 
 .signup {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color: var(--dark);
-/*     background-color: rgba(20, 20, 20, 0.5); */
+    background-color: white;
     min-width: 600px;
-    padding: 20px;
     border-radius: 10px;
     transition: .4s;
     box-shadow: 10px 10px 25px rgba(20, 20, 20, 0.8);
 }
 
 .form-column {
-    padding: 0 25px;
+    padding: 0 20px;
+}
+
+.fields {
+    margin: 0 auto;
 }
 
 .form-column > * {
