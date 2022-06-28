@@ -1,3 +1,5 @@
+import Message from "./message.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     
     const btnLogin = document.getElementById("btnLogin");
@@ -5,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnLogin.onclick = () => {
         const data = new FormData(loginForm);
-        // const request = new Request("/login", {method: "POST", msg: "Hola mundo"})
-
-        // Prueba fetch
+        
         fetch('/login', {
             method: "POST",
             body: new URLSearchParams(data)
@@ -17,11 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (res.ok) {
                     return res.json();
                 } else { 
-                    throw 'Error alv';
+                    throw 'Error';
                 }
             })
             .then(response => {
-                console.log(response);
+                
+                if (response.status) {
+
+                    console.log(response.msg);
+                } else {
+                    
+                    const message = new Message("message", "closeMsg");
+                    message.show(response.msg);
+                }
             })
             .catch (err => console.log(err));
     };
