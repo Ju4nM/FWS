@@ -9,21 +9,32 @@
     <title>Registro FWS</title>
 </head>
 <body>
-    <main class = "d-flex justify-content-center align-items-center">
-        <form action="" class = "signup flex-column py-3 d-flex">
-            <h1 class = "d-flex justify-content-center">Registro</h1>
+    <main class = "d-flex justify-content-center">
+        <form action="" class = "signup flex-column d-flex mt-4 pb-4">
+            <h1 class = "d-flex pt-4 justify-content-center">Registro</h1>
             <div class = "d-flex pt-3 fields">
                 <div class = "form-column">
-                    <input type="text" name="" id="" placeholder="Usuario" class="form-control">
-                    <input type="text" name="" id="" placeholder="Nombre(s)" class="form-control">
-                    <input type="text" name="" id="" placeholder="Apellido paterno" class="form-control">
+                    <label for="name">Nombre:</label>
+                    <input type="text" name="" id="name" placeholder="Nombre(s)" class="form-control">
+                    <label for="lastName">Apellido Paterno:</label>
+                    <input type="text" name="" id="lastName" placeholder="Apellido paterno" class="form-control">
+                    <label for="secondLastName">Apellido Materno:</label>
+                    <input type="text" name="" id="secondLastName" placeholder="Apellido materno" class="form-control">
+                    <label for="username">Usuario:</label>
+                    <input type="text" name="" id="username" placeholder="Usuario" class="form-control">
                 </div>
                 <div class = "form-column">
-                    <input type="text" name="" id="" placeholder="Apellido materno" class="form-control">
-                    <input type="text" name="" id="" placeholder="Correo" class="form-control">
-                    <input type="password" name="" id="" placeholder="Contraseña" class="form-control">
-                    <div class="d-flex justify-content-end mt-2">
-                        <button class="btn btn-outline-success">Registrarse</button>
+                    <label for="email">Correo:</label>
+                    <input type="text" name="" id="email" placeholder="Correo" class="form-control">
+                    <label for="passwd">Contraseña:</label>
+                    <input type="password" name="" id="passwd" placeholder="Contraseña" class="form-control">
+                    <label for="userType">Tipo de usuario:</label>
+                    <select id = "userType" class = "form-select">
+                        <option value="boss">Jefe</option>
+                        <option value="employee">Empleado</option>
+                    </select>
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn btn-success">Registrarse</button>
                     </div>
                 </div>
             </div>
