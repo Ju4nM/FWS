@@ -1,5 +1,4 @@
 import express from "express";
-// import path from "path";
 // import sesion from "express-session"
 import config from './config.js';
 import bodyParser from 'body-parser';
