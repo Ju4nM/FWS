@@ -5,7 +5,7 @@ async function login (req, res) {
 
     let { userName, password, userType } = req.body;
     const result = await Boss.login(userName, password);
-    
+    console.log(result);
     let response;
     if (result) {
         response = {status: true, msg: "Inicio de sesion exitoso"};

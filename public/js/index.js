@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const message = new Message("message", "closeMsg");
                     message.show(response.msg);
                 }
+
             })
             .catch (err => console.log(err));
     };
