@@ -9,7 +9,7 @@
     "dev": "nodemon ./src/index.js"
   },
   "keywords": [],
-  "author": "EcuipoDinamita",
+  "author": "EcuipoDinamit4",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",

@@ -21,14 +21,16 @@ class Boss {
     }
     
     async login (userName, plainPassword) {
-        const { recordset } = await this.pool.request()
+        const result = await this.pool.request()
             .input('userName', userName)
             .input('op', 5)
             .execute("sp_boss");
         
-        const { password } = recordset[0];
-
-        return await Cipher.compareHashes(plainPassword, password);
+        if (result.rowsAffected == 1) {
+            const { password } = result.recordset[0];
+            return await Cipher.compareHashes(plainPassword, password);
+        }
+        return false;
     }
 
 }
