@@ -17,5 +17,13 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mssql": "^8.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ju4nM/FWS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ju4nM/FWS/issues"
+  },
+  "homepage": "https://github.com/Ju4nM/FWS#readme"
 }
