@@ -1,6 +1,6 @@
 import express from 'express';
 import login from '../controllers/login.js';
-
+import signup from '../controllers/signup.js';
 const router = express.Router();
 
 router.post('/login', login);
@@ -8,6 +8,8 @@ router.post('/login', login);
 // router.get("/", (req, res) => {
 //     res.sendFile(path.resolve() + "\\public\\controlPanel.html");
 // })
+
+router.post('/signup', signup);
 
 router.get("/dashboard", (req, res) => {
     // res.sendFile(controlPanel.html");
