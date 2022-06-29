@@ -4,25 +4,27 @@
 
 body {
     background-color: var(--backgroundColor);
-    color: white;
 }
 
 main {
-    height: 90vh;
+    height: 98vh;
     width: 50vw;
     margin: 0 auto;
 }
 
 .signup {
     background-color: white;
-    min-width: 600px;
+    /* min-width: 600px; */
+    width: max-content;
+    height: max-content;
     border-radius: 10px;
     transition: .4s;
     box-shadow: 10px 10px 25px rgba(20, 20, 20, 0.8);
 }
 
 .form-column {
-    padding: 0 20px;
+    padding: 0px 30px;
+    width: 300px;
 }
 
 .fields {
@@ -33,11 +35,20 @@ main {
     margin-bottom: 15px;
 }
 
+input {
+    margin-top: 0;
+}
+
+label {
+    margin: 0;
+}
+
 @media (max-width: 644px) {
     
-    .signup {
+    /* .signup {
         min-width: 350px;
-    }
+        width: max-content;
+    } */
 
     .form-column > * {
         margin-bottom: 20px;

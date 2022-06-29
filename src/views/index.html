@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/index.js"></script>
+    <script type = "module" src = "./js/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<<<<<<< HEAD:public/index.html
     <link rel="stylesheet" href="/styles/index.css">
  <link rel="stylesheet" href="/styles/style.css"> 
+=======
+    <link rel="stylesheet" href="./styles/index.css">
+    <!-- <link rel="stylesheet" href="/styles/style.css"> -->
+>>>>>>> 1748c48b584065d339b053440ac3b80c9fa2d7da:src/views/index.html
     <title>FWS</title>
 </head>
 <body>
@@ -23,9 +28,15 @@
                 <option value="boss">Jefe</option>
                 <option value="employee">Empleado</option>
             </select>
-            <button class = "btn btn-outline-success" id = "btnLogin" type = "button">Iniciar sesion</button>
+            <button class = "btn btn-success" id = "btnLogin" type = "button">Iniciar sesion</button>
             <p><center>¿No tienes una cuenta? <a href="./signup.html">Crea una ahora</a></center></p>
         </form>
     </main>
+    <div class="overlay" style = "display: none;">
+        <div id = "message" class="msg" style = "display: none;"> 
+            <div class="header mb-3"><span>Ocurrio un error </span><input type="button" id="closeMsg" class="btn-close"></div>
+            <p></p>
+        </div>
+    </div>
 </body>
 </html>
