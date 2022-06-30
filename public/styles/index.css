@@ -29,8 +29,6 @@ main {
     margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
-=======
 .overlay {
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 3;
@@ -83,4 +81,3 @@ main {
         background-color: rgba(0, 0, 0, 0.9);
     }
 }
->>>>>>> 1748c48b584065d339b053440ac3b80c9fa2d7da

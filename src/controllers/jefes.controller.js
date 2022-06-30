@@ -32,6 +32,7 @@ class Boss {
         }
         return false;
     }
+    
     async signup (signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd) {
         const result = await this.pool.request()
         .input('op', 1)
