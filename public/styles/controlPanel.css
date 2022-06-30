@@ -1,5 +1,5 @@
 body {
-    background-color: var(--backgroundColor);
+    background-color: var(--backgroundColor); 
 }
 
 main {
@@ -9,7 +9,7 @@ main {
     gap: 50px;
 }
 
-.controlPanel {
+.controlPanel{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;

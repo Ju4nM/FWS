@@ -32,7 +32,19 @@ class Boss {
         }
         return false;
     }
-
+    async signup (signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd) {
+        const result = await this.pool.request()
+        .input('op', 1)
+        .input('name', signupName)
+        .input('lastName', signupLastName)
+        .input('secondLastName', signupSecondLastN)
+        .input('userName', signupUserName)
+        .input('password', signupPasswd)
+        .input('email', signupEmail)
+        .execute('sp_boss')
+        console.log(result);
+    }
 }
+
 
 export default new Boss(await getConnection());
