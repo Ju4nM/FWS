@@ -7,4 +7,8 @@ router.get("/", (req, res) => {
     res.sendFile(app.get("views") + "index.html");
 });
 
+router.get("/signup", (req, res) => {
+    res.sendFile(app.get("views") + "signup.html");
+});
+
 export default router;

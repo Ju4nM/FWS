@@ -6,12 +6,6 @@ export default class Message {
         
         document.getElementById(btnCloseId).onclick = () => {
             
-            // this.message.style.animation = "hiddenMsg";
-            // setTimeout(() => {
-            //     this.message.style.display = "none";
-            // }, 500);
-            
-            // this.overlay.style.animation = "hiddenOverlay";
             this.overlay.style.display = "none";
             this.message.style.display = "none";
         };
