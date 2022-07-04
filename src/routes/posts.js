@@ -7,9 +7,9 @@ router.post('/login', login);
 
 router.post('/signup', signup);
 
-router.get("/dashboard", (req, res) => {
+// router.get("/dashboard", (req, res) => {
     // res.sendFile(controlPanel.html");
     // res.send(path.resolve + "\\public\\controlPanel.html");
-});
+// });
 
 export default router;

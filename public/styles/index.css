@@ -20,7 +20,7 @@ main {
     min-width: 300px;
     width: 500px;
     background-color: white;
-    padding: 30px;
+    /* padding: 30px; */
     border-radius: 10px;
     box-shadow: 10px 10px 25px rgba(20, 20, 20, 0.8);
 }

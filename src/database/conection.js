@@ -15,8 +15,8 @@ export default async function getConnection () {
     
     try {
         const pool = await sql.connect(sqlConfig);
-        let result = await pool.request().query('SELECT 1');
-         console.log(result);
+        // let result = await pool.request().query('SELECT 1');
+        // console.log(result);
         return pool;        
     } catch (error) {
         console.log(error);

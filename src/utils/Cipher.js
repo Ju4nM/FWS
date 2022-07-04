@@ -1,9 +1,11 @@
+import Cryptr from 'cryptr';
 import bcrypt from 'bcrypt';
 
 class Cipher {
 
     constructor (saltRounds) {
         this.saltRounds = saltRounds;
+        this.crypt = new Cryptr("MySecretKey");
     }
 
     async hash (plainText) {
@@ -12,6 +14,15 @@ class Cipher {
 
     async compareHashes (plainText, hash) {
         return await bcrypt.compare(plainText, hash);
+    }
+
+    // AES cipher functions
+    encrypt (plainText) {
+        return this.crypt.encrypt(plainText);
+    }
+
+    decrypt (hash) {
+        return this.crypt.decrypt(hash);
     }
 }
 
