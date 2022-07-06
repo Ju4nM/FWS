@@ -1,0 +1,46 @@
+body
+{
+
+background-color: #0b4f6c;
+color: white;
+
+}
+
+.tarjeta{
+    background-color: #23d15d;
+    border: solid white 5px; 
+border-radius: 15px;
+ color: black;
+ margin-top: 20px;   
+}
+
+nav
+{
+background-color: #01baef;
+padding: 20px;
+display: flex;
+justify-content: space-between;
+
+}
+
+main
+{
+width: 800px;
+margin: 0 auto;
+}
+
+.LOGOnav
+{
+    width : 50px;
+}
+
+.logo
+{
+width: 300px;
+}
+
+.acomodo
+{
+    display: flex;
+    justify-content: space-between;
+}

@@ -56,16 +56,22 @@ class Boss {
     }
     
     async signup (signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd) {
+        const hashedPassword = await Cipher.hash(signupPasswd);
         const result = await this.pool.request()
         .input('op', 1)
         .input('name', signupName)
         .input('lastName', signupLastName)
         .input('secondLastName', signupSecondLastN)
         .input('userName', signupUserName)
-        .input('password', signupPasswd)
+        .input('password', hashedPassword)
         .input('email', signupEmail)
         .execute('sp_boss')
-        console.log(result);
+        
+        if (result.rowsAffected[0] == 1) {
+            return true;
+        }
+
+        return false;
     }
 }
 

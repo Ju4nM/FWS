@@ -13,4 +13,12 @@ router.get("/signup", (req, res) => {
     res.sendFile(app.get("views") + "signup.html");
 });
 
+router.get("/login", (req, res) => {
+    res.sendFile(app.get("views") + "login.html");
+});
+
+router.get("/about", (req, res) => {
+    res.sendFile(app.get("views") + "acercade.html");
+});
+
 export default router;
