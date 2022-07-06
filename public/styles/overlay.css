@@ -1,0 +1,52 @@
+.overlay {
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 3;
+    position: fixed;
+    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    animation: showOverlay .9s;
+}
+
+.header {
+    min-width: 250px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+}
+
+.msg {
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 3px;
+    animation: showMsg .5s;
+}
+
+@keyframes showMsg {
+    0% {
+        transform: scale(0%);
+    }
+
+    100% {
+        transform: scale(100%);
+    }
+}
+
+@keyframes showOverlay {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+}

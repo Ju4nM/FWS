@@ -22,6 +22,7 @@ router.get("/signup", (req, res) => {
     res.sendFile(app.get("views") + "signup.html");
 });
 
+<<<<<<< HEAD
 router.get("/dashboard", async (req, res) => {
     
     let cookieAuth = new CookieAuth(req.cookies);
@@ -43,6 +44,14 @@ router.get("/dashboard", async (req, res) => {
     
     // resFile += "bossDashboard.html";
     res.sendFile(resFile);
+=======
+router.get("/login", (req, res) => {
+    res.sendFile(app.get("views") + "login.html");
+});
+
+router.get("/about", (req, res) => {
+    res.sendFile(app.get("views") + "acercade.html");
+>>>>>>> main
 });
 
 export default router;
