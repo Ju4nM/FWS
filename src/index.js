@@ -1,5 +1,5 @@
 import app from './app.js';
-import './database/conection.js';
+// import './database/conection.js';
 
 app.listen(app.get('port'));
 

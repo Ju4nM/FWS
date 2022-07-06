@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (response.status) {
 
-                    console.log(response.msg);
+                    // console.log(response.msg);
+                    window.location.reload();
                 } else {
                     
                     const message = new Message("message", "closeMsg");
