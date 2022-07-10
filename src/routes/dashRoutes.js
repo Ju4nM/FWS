@@ -22,7 +22,6 @@ router.get("/signup", (req, res) => {
     res.sendFile(app.get("views") + "signup.html");
 });
 
-<<<<<<< HEAD
 router.get("/dashboard", async (req, res) => {
     
     let cookieAuth = new CookieAuth(req.cookies);
@@ -44,14 +43,30 @@ router.get("/dashboard", async (req, res) => {
     
     // resFile += "bossDashboard.html";
     res.sendFile(resFile);
-=======
-router.get("/login", (req, res) => {
-    res.sendFile(app.get("views") + "login.html");
+});
+
+router.get("/login", async (req, res) => {
+
+    let cookieAuth = new CookieAuth(req.cookies);
+    let cookieIsExist = await cookieAuth.auth();
+    
+    if (!cookieIsExist) {
+        res.clearCookie("sessid");
+        res.sendFile(app.get("views") + "login.html");
+    } else {
+        res.redirect("/dashboard");
+    }
+
+    // res.sendFile(app.get("views") + "login.html");
 });
 
 router.get("/about", (req, res) => {
     res.sendFile(app.get("views") + "acercade.html");
->>>>>>> main
 });
+
+router.get("/clearCookie", (req, res) => {
+    res.clearCookie("sessid");
+    res.send("Hola mundo");
+})
 
 export default router;

@@ -1,4 +1,4 @@
-import Boss from './jefes.controller.js'
+import Boss from './boss.controller.js'
 import Validation from '../utils/fieldValidation.js';
 
 async function signup (req,res) {

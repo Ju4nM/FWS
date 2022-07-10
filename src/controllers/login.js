@@ -1,4 +1,4 @@
-import Boss from '../controllers/jefes.controller.js'
+import Boss from '../controllers/boss.controller.js'
 // import Cipher from '../utils/Cipher.js';
 
 async function login (req, res) {

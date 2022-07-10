@@ -44,3 +44,7 @@ width: 300px;
     display: flex;
     justify-content: space-between;
 }
+
+.acomodo > img {
+    margin-left: 25px;
+}

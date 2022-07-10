@@ -1,5 +1,5 @@
 // import sql from 'mssql';
-import getConnection from './../database/conection.js';
+import getConnection from '../database/conection.js';
 import Cipher from '../utils/Cipher.js';
 
 // let result = await pool.request().query('SELECT 1');
