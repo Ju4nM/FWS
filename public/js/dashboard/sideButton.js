@@ -9,10 +9,22 @@ export default class SideButton {
         this.button.onclick = e => {
             eventFunction(e);
             this.#showContent();
-            this.#titleRename();
         }
     }
 
-    
+    #titleRename () {
+        this.titleElement.innerHTML = this.title;
+    }
 
+    #showContent () {
+        this.#titleRename();
+
+        this.button.classList.add("controlButton-active");
+        this.contentElement.style.display = "";
+    }
+
+    hideContent () {
+        this.contentElement.style.display = "none";
+        this.button.classList.remove("controlButton-active");
+    }
 }

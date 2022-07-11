@@ -73,6 +73,10 @@ class Boss {
 
         return false;
     }
+
+    // async getProducts() {
+        
+    // }
 }
 
 

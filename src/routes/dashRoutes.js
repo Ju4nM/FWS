@@ -1,5 +1,6 @@
 import express from 'express';
 import app from "../app.js";
+import dashboard from "../controllers/dashboard.controller.js";
 import CookieAuth from '../utils/cookieAuth.js';
 
 const router = express.Router();
@@ -11,7 +12,7 @@ router.get("/", async (req, res) => {
     
     if (!cookieIsExist) {
         res.clearCookie("sessid");
-        res.sendFile(app.get("views") + "index.html");
+        res.render("index");
     } else {
         res.redirect("/dashboard");
     }
@@ -19,31 +20,10 @@ router.get("/", async (req, res) => {
 
 router.get("/signup", (req, res) => {
     res.clearCookie("sessid");
-    res.sendFile(app.get("views") + "signup.html");
+    res.render("signup");
 });
 
-router.get("/dashboard", async (req, res) => {
-    
-    let cookieAuth = new CookieAuth(req.cookies);
-    let cookieIsExist = await cookieAuth.auth();
-    
-    if (!cookieIsExist) {
-        // res.setHeader("Content-Type", "text/html");
-        res.redirect("/");
-    }
-
-    let userType = cookieAuth.getUserType();
-    let resFile = app.get("views");
-    
-    if (userType === "boss") {
-        resFile += "bossDashboard.html";
-    } else if (userType == "employee") {
-        resFile += "employeeDashboard.html";
-    }
-    
-    // resFile += "bossDashboard.html";
-    res.sendFile(resFile);
-});
+router.get("/dashboard", dashboard);
 
 router.get("/login", async (req, res) => {
 
@@ -52,19 +32,17 @@ router.get("/login", async (req, res) => {
     
     if (!cookieIsExist) {
         res.clearCookie("sessid");
-        res.sendFile(app.get("views") + "login.html");
+        res.render("login");
     } else {
         res.redirect("/dashboard");
     }
-
-    // res.sendFile(app.get("views") + "login.html");
 });
 
 router.get("/about", (req, res) => {
-    res.sendFile(app.get("views") + "acercade.html");
+    res.render("acercade");
 });
 
-router.get("/clearCookie", (req, res) => {
+router.get("/logout", (req, res) => {
     res.clearCookie("sessid");
     res.send("Hola mundo");
 })

@@ -14,15 +14,11 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 app.set("views", path.resolve() + "\\src\\views\\");
+app.set("view engine", "ejs");
 app.set("port", config.port)
 
 // Routes
 app.use("/", dashRoutes);
 app.use("/", posts);
-
-app.get("/controlPanel", (req, res) => {
-    
-    res.sendFile(app.get("views") + "controlPanel.html");
-});
 
 export default app;

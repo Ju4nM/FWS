@@ -4,29 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/dashboard.css">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="./styles/overlay.css">
+    <!-- <link rel="stylesheet" href="/styles/style.css"> -->
     <script src="https://kit.fontawesome.com/5128f6ea7d.js" crossorigin="anonymous"></script>
+    <script src="./js/dashboard/dashboard.js" type = "module"></script>
     <title>Panel de control</title>
 </head>
 <body>
-    <!-- <main class = "d-flex justify-content-center align-items-center flex-direction-column">
-        <h1>Panel de control</h1>
-        <div class="controlPanel p-3">
-            <a href="#" class="btn btn-success text-center">Productos</a>
-            <a href="#" class="btn btn-success text-center">Empleados</a>
-            <a href="#" class="btn btn-success text-center">Estadisticas</a>
-            <button class = "btn btn-success">Notificaciones</button>
-            <a href="#" class="btn btn-success text-center">Cuenta</a>
-        </div>
-    </main> -->
-
     <main>
         <div class = "titleBar">
-            <h2 id = "titleId">Productos</h2>
+            <h2 id = "title">Productos</h2>
         </div>
         <nav class="sideBar">
-            <div class="controls">
+            <div>
                 <button id="btnProducts" class="controlButton controlButton-active">
                     <i class="fa-solid fa-prescription-bottle-medical fa-2xl"></i>
                     <span>Productos</span>
@@ -36,7 +28,7 @@
                     <span>Empleados</span>
                 </button>
             </div>
-            <div class="account">
+            <div>
                 <button id="btnAccount" class = "controlButton">
                     <i class="fa-solid fa-user fa-xl"></i>
                     <span>Cuenta</span>
@@ -45,11 +37,19 @@
         </nav>
         <div class="content">
             <div class="main">
-                
                 <div id="products"><h1>Seccion de productos</h1></div>
-                <div id="employees"><h1>Seccion de empleados</h1></div>
+                <div id="employees" style = "display: none;"><h1>Seccion de empleados</h1></div>
             </div>
         </div>
     </main>
+    <div class="overlay" style = "display: grid;">
+        <div class="account">
+            <div class="header mb-3"><h3><%= userName %></h3><input type="button" id="closeMsg" class="btn-close"></div>
+            <div class = "controls">
+                <a href="/settings" target="_blank" class = "btn btn-primary">Ajustes de cuenta</a>
+                <button id="logout" class="btn btn-danger">Cerrar sesion</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

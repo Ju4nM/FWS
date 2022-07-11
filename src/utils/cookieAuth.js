@@ -24,9 +24,18 @@ export default class CookieAuth {
     async auth () {
     
         if (this.sessid == undefined) return false;
-    
-        const { userType } = JSON.parse(Cipher.decrypt(this.sessid));
-    
+        
+        let data;
+        
+        try {
+            
+            data = JSON.parse(Cipher.decrypt(this.sessid));
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+        
+        const { userType } = data;
         let result;
         
         if (userType == "boss") {
@@ -44,5 +53,9 @@ export default class CookieAuth {
         if (this.sessid == undefined) return "";
         const { userType } = JSON.parse(Cipher.decrypt(this.sessid));
         return userType;
+    }
+
+    getData () {
+        return JSON.parse(Cipher.decrypt(this.sessid)); 
     }
 }
