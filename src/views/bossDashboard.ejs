@@ -41,7 +41,7 @@
         <div class="content">
             <div class="main">
                 <div id="products" class = "section">
-                    <% products.forEach (function (product) { %>
+                    <% products.forEach (product => { %>
                         <div class="productCard">
                             <div class = "topRow">
                                 <h3><%= product.productName %></h3>
@@ -57,7 +57,26 @@
                     <% }); %>
                 </div>
                 <div id="employees" class = "section" style = "display: none;">
-                    
+                    <table class = "table table-strpied table-dark">
+                        <thead>
+                            <td>Id</td>
+                            <td>Nombre</td>
+                            <td>Apellido paterno</td>
+                            <td>Apellido materno</td>
+                            <td>Correo</td>
+                        </thead>
+                        <tbody>
+                            <% employees.forEach(employee => { %>
+                                <tr>
+                                    <td><%= employee["Id de empleado"] %> </td>
+                                    <td><%= employee["Nombre empleado"] %> </td>
+                                    <td><%= employee["Apellido Materno Empleado"] %> </td>
+                                    <td><%= employee["Apellido Paterno Empleado"] %> </td>
+                                    <td><%= employee["Correo electronico de empleado"] %> </td>
+                                </tr>
+                            <% }) %> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

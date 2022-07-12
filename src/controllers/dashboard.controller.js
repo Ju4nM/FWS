@@ -14,11 +14,14 @@ export default async function dashboard (req, res) {
         let cookieData = cookieAuth.getData();
         let resView;
         let data = {userName: cookieData.userName};
+        
         if (cookieData.userType === "boss") {
 
             resView = "bossDashboard";
             let products = await Boss.getProducts(cookieData.bossId);
+            let employees = await Boss.getAllEmployees(cookieData.bossId);
             data.products = products;
+            data.employees = employees;
         } else if (cookieData.userType == "employee") {
             
             resView = "employeeDashboard";

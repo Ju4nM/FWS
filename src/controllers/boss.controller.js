@@ -83,6 +83,14 @@ class Boss {
         return products.recordset;
     }
 
+    async getAllEmployees (bossId) {
+        let employeesResult = await this.pool.request()
+        .input("op", 7)
+        .input("bossId", bossId)
+        .execute("sp_employee");
+
+        return employeesResult.recordset;
+    }
 }
 
 
