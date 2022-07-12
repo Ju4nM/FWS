@@ -1,13 +1,13 @@
 export default class SideButton {
 
-    constructor (buttonId, titleElement, title, contentId, eventFunction) {
+    constructor (buttonId, titleElement, title, contentId, btnHandler) {
         this.button = document.getElementById(buttonId);
         this.contentElement = document.getElementById(contentId);
         this.titleElement = titleElement;
         this.title = title;
 
         this.button.onclick = e => {
-            eventFunction(e);
+            btnHandler(e);
             this.#showContent();
         }
     }

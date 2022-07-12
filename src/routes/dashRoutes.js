@@ -44,7 +44,7 @@ router.get("/about", (req, res) => {
 
 router.get("/logout", (req, res) => {
     res.clearCookie("sessid");
-    res.send("Hola mundo");
+    res.redirect("/");
 })
 
 export default router;
