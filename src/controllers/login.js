@@ -1,10 +1,18 @@
 import Boss from '../controllers/boss.controller.js'
+import Employee from "../controllers/employee.controller.js";
 // import Cipher from '../utils/Cipher.js';
 
 async function login (req, res) {
 
     let { userName, password, userType } = req.body;
-    const result = await Boss.login(userName, password);
+    let result;
+
+    if (userType == "boss") {
+        result = await Boss.login(userName, password);
+    } else if (userType == "employee") {
+        result = await Employee.login(userName, password);
+    }
+
     // console.log(result);
     let response;
     if (result.status) {

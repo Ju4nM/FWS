@@ -14,7 +14,7 @@ export default async function dashboard (req, res) {
         
         if (data.userType === "boss") {
             resView = "bossDashboard";
-        } else if (userType == "employee") {
+        } else if (data.userType == "employee") {
             resView = "employeeDashboard";
         } else {
             res.redirect("/");

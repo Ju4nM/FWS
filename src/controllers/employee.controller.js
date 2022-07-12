@@ -44,7 +44,7 @@ class Employee {
         
         let dataSessid = {userName, password, userType: "employee"}
         let sessid = Cipher.encrypt(JSON.stringify(dataSessid)); // session id creation for the cookie data
-        console.log(sessid);
+        
         await this.pool.request() // set session id in the database
         .input('id', employeeId)
         .input('sessId', sessid)

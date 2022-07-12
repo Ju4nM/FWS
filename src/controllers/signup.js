@@ -1,9 +1,10 @@
 import Boss from './boss.controller.js'
+import Employee from "./employee.controller.js";
 import Validation from '../utils/fieldValidation.js';
 
 async function signup (req,res) {
     
-    let {signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd} = req.body
+    let {signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd, signupUserType} = req.body
     
     const validation = new Validation();
     
@@ -19,10 +20,20 @@ async function signup (req,res) {
     let response;
 
     if (errors.length >= 1) {
-        console.log(errors);
+        // console.log(errors);
         response = {status: false, response: errors};
     } else {
-        let result = await Boss.signup(signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd)
+
+        let result;
+
+        if (signupUserType == "boss") {
+            
+            result = await Boss.signup(signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd)
+        } else if (signupUserType == "employee") {
+
+            result = await Employee.signup(signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd)
+        }
+
 
         if (result) {
             response = {status: true, response: "Se ha registrado correctamente"};

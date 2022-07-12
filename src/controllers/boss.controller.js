@@ -43,9 +43,9 @@ class Boss {
 
     async setSessId (bossId, userName, password) {
         
-        let dataSessid = {userName, password, userType: "boss"}
+        let dataSessid = {bossId, userName, password, userType: "boss"}
         let sessid = Cipher.encrypt(JSON.stringify(dataSessid)); // session id creation for the cookie data
-        console.log(sessid);
+        // console.log(sessid);
         await this.pool.request() // set session id in the database
         .input('id', bossId)
         .input('sessId', sessid)
@@ -74,9 +74,14 @@ class Boss {
         return false;
     }
 
-    // async getProducts() {
-        
-    // }
+    async getProducts(bossId) {
+        const products = await this.pool.request()
+        .input("op", 5)
+        .input("ownerId", bossId)
+        .execute("sp_product")
+
+        return products.recordset;
+    }
 }
 
 
