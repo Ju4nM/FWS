@@ -1,4 +1,6 @@
 import CookieAuth from "../utils/cookieAuth.js";
+import Boss from "./boss.controller.js";
+import Employee from "./employee.controller.js";
 
 export default async function dashboard (req, res) {
     let cookieAuth = new CookieAuth(req.cookies);
@@ -9,18 +11,22 @@ export default async function dashboard (req, res) {
         res.redirect("/");
     } else {
 
-        let data = cookieAuth.getData();
+        let cookieData = cookieAuth.getData();
         let resView;
-        
-        if (data.userType === "boss") {
+        let data = {userName: cookieData.userName};
+        if (cookieData.userType === "boss") {
+
             resView = "bossDashboard";
-        } else if (data.userType == "employee") {
+            let products = await Boss.getProducts(cookieData.bossId);
+            data.products = products;
+        } else if (cookieData.userType == "employee") {
+            
             resView = "employeeDashboard";
         } else {
             res.redirect("/");
         }
         
-        res.render(resView, {userName: data.userName});
+        // console.log(data);
+        res.render(resView, data);
     }
-
 }

@@ -41,47 +41,24 @@
         <div class="content">
             <div class="main">
                 <div id="products" class = "section">
-
-                    <div class="productCard">
-                        <div class = "topRow">
-                            <h3>Nombre producto</h3>
-                            <span>10</span>
-                        </div>
-                        <div class = "bottomRow">
-                            <p>Descripcion Producto. Aqui va la descripcion del producto, este es un test</p>
-                            <div>
-                                <button class="btn btn-primary">Agregar</button>
+                    <% products.forEach (function (product) { %>
+                        <div class="productCard">
+                            <div class = "topRow">
+                                <h3><%= product.productName %></h3>
+                                <span><%= product.stock %></span>
+                            </div>
+                            <div class = "bottomRow">
+                                <p><%= product.description %></p>
+                                <div>
+                                    <button class="btn btn-primary">Agregar</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="productCard">
-                        <div class = "topRow">
-                            <h3>Nombre producto</h3>
-                            <span>10</span>
-                        </div>
-                        <div class = "bottomRow">
-                            <p>Descripcion Producto. Aqui va la descripcion del producto, este es un test</p>
-                            <div>
-                                <button class="btn btn-primary">Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="productCard">
-                        <div class = "topRow">
-                            <h3>Nombre producto</h3>
-                            <span>10</span>
-                        </div>
-                        <div class = "bottomRow">
-                            <p>Descripcion Producto. Aqui va la descripcion del producto, este es un test</p>
-                            <div>
-                                <button class="btn btn-primary">Agregar</button>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
                 </div>
-                <div id="employees" class = "section" style = "display: none;"><h1>Seccion de empleados</h1></div>
+                <div id="employees" class = "section" style = "display: none;">
+                    
+                </div>
             </div>
         </div>
     </main>

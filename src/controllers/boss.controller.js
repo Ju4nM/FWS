@@ -82,6 +82,7 @@ class Boss {
 
         return products.recordset;
     }
+
 }
 
 
