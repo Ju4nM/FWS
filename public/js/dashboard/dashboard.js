@@ -1,5 +1,6 @@
 import SideButton from "./sideButton.js";
 import HamburgerMenu from "./navbarMenu.js";
+import Finder from "./finder.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -11,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnAccount.onclick = btnAccountHandler;
     closeWindowAccount.onclick = btnAccountHandler;
+
+    new Finder("toSearch", "searchCriteria", "listProducts");
 
     const navMenu = new HamburgerMenu("hamburgerMenu", "sideBar", "overlay");
 
@@ -27,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     function btnAccountHandler () {
-        let windowStatus = windowAccount.parentElement.style.display == "none";
+        let windowStatus = windowAccount.style.display == "none";
         
         windowAccount.parentElement.style.display = windowStatus ? "grid" : "none";
         windowAccount.style.display = windowStatus ? "block" : "none";

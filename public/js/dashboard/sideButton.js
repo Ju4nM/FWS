@@ -5,9 +5,14 @@ export default class SideButton {
         this.contentElement = document.getElementById(contentId);
         this.titleElement = titleElement;
         this.title = title;
+        this.handlerEvent = btnHandler;
 
+        this.#eventsListeners();
+    }
+        
+    #eventsListeners () {
         this.button.onclick = e => {
-            btnHandler(e);
+            this.handlerEvent(e);
             this.#showContent();
         }
     }

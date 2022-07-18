@@ -41,23 +41,59 @@
         <div class="content">
             <div class="main">
                 <div id="products" class = "section">
-                    <% products.forEach (product => { %>
-                        <div class="productCard">
-                            <div class = "topRow">
-                                <h3><%= product.productName %></h3>
-                                <span><%= product.stock %></span>
-                            </div>
-                            <div class = "bottomRow">
-                                <p><%= product.description %></p>
+                    <form class = "d-flex p-3 gap-3 flex-column finder">
+                        <input type="text" id = "toSearch" class="form-control" placeholder="Buscar producto..." autocomplete="off">
+                        <div class = "input-group">
+                            <span class = "input-group-text">Filtrar por</span>
+                            <select id = "searchCriteria" class = "form-select">
+                                <option value="any">Cualquiera</option>
+                                <option value="productName">Nombre</option>
+                                <option value="description">Descripcion</option>
+                                <option value="stock">Stock</option>
+                            </select>
+                        </div>
+                        <!-- <button class="btn btn-outline-primary">Buscar <i class="fa-solid fa-magnifying-glass"></i></button> -->
+                    </form>
+                    <div class="listProducts" id = "listProducts">
+                        <% products.forEach ((product) => { %>
+                            <div class="productCard" data-card = <%= product.productId %>>
+                                <div class = "d-flex justify-content-between align-items-center">
+                                    <h3 data-name = "productName"><%= product.productName %> </h3>
+                                    <span data-name = "stock"><%= product.stock %> </span>
+                                </div>
                                 <div>
-                                    <button class="btn btn-primary">Agregar</button>
+                                    <div>
+                                        <p data-name = "description"><%= product.description %> </p>
+                                        <p data-name = "solutions" style = "display: none;"><%= product.solutions %> </p>
+                                    </div>
+                                    <div class = "d-flex justify-content-end gap-2">
+                                        <button class="btn btn-primary">Agregar</button>
+                                        <button class="btn btn-danger">Borrar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <% }); %>
+                        <% }); %>
+                        <!-- <div class="Pcard bg-secondary d-flex flex-column gap-2" style = "width: 100%; padding: 10px;">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3>NombreProducto</h3> <span>stock</span>
+                            </div>
+                            <div class = "d-flex justify-content-between">
+                                <p>Soluciones</p>
+                                <div class = "d-flex flex-column">
+                                    <button class="btn btn-danger">Borrar</button>
+                                </div>
+                            </div>
+                            <div class = "d-flex justify-content-between">
+                                <p>Descripcion</p>
+                                <div class = "d-flex flex-column">
+                                    <button class="btn btn-primary">Boton</button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
                 <div id="employees" class = "section" style = "display: none;">
-                    <table class = "table table-strpied table-dark">
+                    <table class = "table table-striped table-dark">
                         <thead>
                             <td>Id</td>
                             <td>Nombre</td>

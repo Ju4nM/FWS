@@ -104,7 +104,6 @@ main {
     margin: 0 auto;
     width: 98%;
     margin-top: 20px;
-    
 }
 
 .account {
@@ -137,43 +136,48 @@ main {
 
 /* ---------------------------------------------------------------------- */
 
+.listProducts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+    grid-gap: 20px;
+    padding: 0 20px 20px 20px;
+    place-items: center;
+}
+
 .productCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 600px;
-    height: 120px;
     background-color: #D6D6FF;
     padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
-    box-shadow: 10px 8px 10px rgba(0, 0, 0, 0.6);
+    height: inherit;
+    width: inherit;
+    /* min-width: max-content; */
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8);
+    transition: height 10s;
 }
 
-.topRow h3 {
-    font-weight: bold;
-}
-
-.topRow {
-    display: flex;
-    justify-content: space-between;
-}
-
-.topRow span {
-    color: gray;
-    margin-right: 10px;
-}
-
-.bottomRow p {
-    width: 50%;
+.productCard div p {
+    width: 10em;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.productCard .bottomRow {
-    display: flex;
-    justify-content: space-between;
+.productCard-disable {
+    display: none;
+}
+
+.productCard-enable {
+    display: block;
+}
+
+.finder {
+    width: 80%;
+    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 @keyframes sideBar {
@@ -186,10 +190,26 @@ main {
     }
 }
 
+@media (max-width: 900px) {
+    .listProducts {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 10px;
+    }
+}
+
 @media (max-width: 760px) {
     
+    .listProducts {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
     .productCard {
         width: 90%;
+    }
+
+    .productCard div p {
+        /* width: 300px; */
     }
 
     .titleBar {
