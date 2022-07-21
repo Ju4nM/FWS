@@ -38,7 +38,7 @@
                 </button>
             </div>
         </nav>
-        <div class="content">
+        <div class="content" id = "contenedorPrincipal">
             <div class="main">
                 <div id="products" class = "section">
                     <form class = "d-flex p-3 gap-3 flex-column finder">
@@ -49,47 +49,38 @@
                                 <option value="any">Cualquiera</option>
                                 <option value="productName">Nombre</option>
                                 <option value="description">Descripcion</option>
+                                <option value="solutions">Soluciones</option>
                                 <option value="stock">Stock</option>
                             </select>
                         </div>
-                        <!-- <button class="btn btn-outline-primary">Buscar <i class="fa-solid fa-magnifying-glass"></i></button> -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button class="btn btn-outline-primary" id="endSearching" type = "button">Terminar busqueda</button>
+                            <button class = "btn btn-outline-success" id = "btnFinder" type = "input">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </form>
                     <div class="listProducts" id = "listProducts">
-                        <% products.forEach ((product) => { %>
-                            <div class="productCard" data-card = <%= product.productId %>>
-                                <div class = "d-flex justify-content-between align-items-center">
-                                    <h3 data-name = "productName"><%= product.productName %> </h3>
-                                    <span data-name = "stock"><%= product.stock %> </span>
-                                </div>
+                        <!-- <div class="productCard">
+                            <div class="d-flex justify-content-between gap-2 align-items-center px-2">
+                                <h3><a href="/product/4461" class="productLink" target="_blank">Nombre Producto</a></h3>
+                                <span class = "text-primary">-100</span>
+                            </div>
+                            <div class = "d-flex justify-content-between">
                                 <div>
-                                    <div>
-                                        <p data-name = "description"><%= product.description %> </p>
-                                        <p data-name = "solutions" style = "display: none;"><%= product.solutions %> </p>
-                                    </div>
-                                    <div class = "d-flex justify-content-end gap-2">
-                                        <button class="btn btn-primary">Agregar</button>
-                                        <button class="btn btn-danger">Borrar</button>
-                                    </div>
+                                    <p>Descripcion</p>
+                                    <p>Soluciones</p>
+                                </div>
+                                <div class = "d-flex flex-column align-items-end text-end">
+                                    <p><span class = "text-warning">Expira: </span> 2022-07-20</p>
+                                    <p><span class = "text-success">Precio: </span>$100</p>
                                 </div>
                             </div>
-                        <% }); %>
-                        <!-- <div class="Pcard bg-secondary d-flex flex-column gap-2" style = "width: 100%; padding: 10px;">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h3>NombreProducto</h3> <span>stock</span>
-                            </div>
-                            <div class = "d-flex justify-content-between">
-                                <p>Soluciones</p>
-                                <div class = "d-flex flex-column">
-                                    <button class="btn btn-danger">Borrar</button>
-                                </div>
-                            </div>
-                            <div class = "d-flex justify-content-between">
-                                <p>Descripcion</p>
-                                <div class = "d-flex flex-column">
-                                    <button class="btn btn-primary">Boton</button>
-                                </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn btn-primary">Agregar</button><button class="btn btn-danger">Borrar</button>
                             </div>
                         </div> -->
+                    </div>
+                    <div class="spinner-border text-primary my-2 mb-3" id = "spinner" style = "display: none;">
+                        <span id = "spinnerText" style = "display: none;"></span>
                     </div>
                 </div>
                 <div id="employees" class = "section" style = "display: none;">
@@ -121,7 +112,7 @@
         <div class="account" id = "windowAccount" style = "display: none;">
             <div class="header mb-3"><h3><%= userName %></h3><input type="button" id="closeWindow" class="btn-close"></div>
             <div class = "controls">
-                <a href="/settings" target="_blank" class = "btn btn-primary">Ajustes de cuenta</a>
+                <a href="/dashboard/account" target="_blank" class = "btn btn-primary">Cuenta</a>
                 <a href="/logout" class="btn btn-danger">Cerrar sesion</a>
                 <!-- <button id="logout" class="btn btn-danger">Cerrar sesion</button> -->
             </div>

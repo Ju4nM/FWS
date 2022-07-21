@@ -1,10 +1,20 @@
 import SideButton from "./sideButton.js";
 import HamburgerMenu from "./navbarMenu.js";
-import Finder from "./finder.js";
+import ListProducts from "./listProducts.js";
+import ProductFinder from "./productFinder.js";
+import Spinner from "./spinner.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    let sectionProducts = document.getElementById("products");
+    let sectionEmployees = document.getElementById("employees");
+    let spinner = new Spinner("spinner", "spinnerText");
+
+    let listProducts = new ListProducts("listProducts", sectionProducts, spinner);
+    new ProductFinder("toSearch", "searchCriteria", "btnFinder", listProducts, spinner);
     let currentActive;
+    
     const title = document.getElementById("title");
     const windowAccount = document.getElementById("windowAccount");
     const closeWindowAccount = document.getElementById("closeWindow");
@@ -13,18 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
     btnAccount.onclick = btnAccountHandler;
     closeWindowAccount.onclick = btnAccountHandler;
 
-    new Finder("toSearch", "searchCriteria", "listProducts");
+    new HamburgerMenu("hamburgerMenu", "sideBar", "overlay");
 
-    const navMenu = new HamburgerMenu("hamburgerMenu", "sideBar", "overlay");
-
-    const btnProducts = new SideButton("btnProducts", title, "Productos", "products", () => {
+    const btnProducts = new SideButton("btnProducts", title, "Productos", sectionProducts, () => {
         currentActive.hideContent();
         currentActive = btnProducts;
     });
     
     currentActive = btnProducts;
 
-    const btnEmployees = new SideButton("btnEmployees", title, "Empleados", "employees", () => {
+    const btnEmployees = new SideButton("btnEmployees", title, "Empleados", sectionEmployees, () => {
         currentActive.hideContent();
         currentActive = btnEmployees;
     });

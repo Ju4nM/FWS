@@ -145,6 +145,11 @@ main {
     grid-gap: 20px;
     padding: 0 20px 20px 20px;
     place-items: center;
+    margin-bottom: 20px;
+}
+
+.listProducts .spinner-border {
+    grid-column: 1 / -1;
 }
 
 .productCard {
@@ -155,7 +160,28 @@ main {
     /* min-width: max-content; */
     border-radius: 10px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8);
-    transition: height 10s;
+    animation: fadeIn .5s;
+}
+
+.productLink {
+    color: white;
+    text-decoration: none;
+    transition: .4s;
+}
+
+.productLink:hover {
+    color: #01BAEF;
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
 }
 
 .productCard div p {
@@ -163,6 +189,10 @@ main {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.productCard div div {
+    width: 50%;
 }
 
 .productCard-disable {
@@ -175,6 +205,7 @@ main {
 
 .finder {
     width: 80%;
+    background-color: white;
     box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     margin-bottom: 10px;
@@ -190,14 +221,22 @@ main {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1186px) {
     .listProducts {
         grid-template-columns: repeat(2, 1fr);
         padding: 0 10px;
     }
+
+    .finder {
+        width: 85%;
+    }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 810px) {
+    
+    .finder {
+        width: 90%;
+    }
     
     .listProducts {
         grid-template-columns: 1fr;
@@ -206,10 +245,6 @@ main {
 
     .productCard {
         width: 90%;
-    }
-
-    .productCard div p {
-        /* width: 300px; */
     }
 
     .titleBar {

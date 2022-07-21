@@ -16,15 +16,15 @@
         <form id = "loginForm" class = "login p-4 d-flex justify-content-center flex-column">
             <center><h1>Inicio de sesión</h1></center>
             <label for="userName">Usuario:</label>
-            <input type="text" name="userName" id = "userName" placeholder="Usuario" class = "form-control" />
+            <input type="text" name="userName" autocomplete="username" id = "userName" placeholder="Usuario" class = "form-control" />
             <label for="password">Contrase&ntilde;a</label>
-            <input type="password" name="password" id = "password" placeholder="Contraseña" class = "form-control" />
+            <input type="password" autocomplete = "current-password" name="password" id = "password" placeholder="Contraseña" class = "form-control" />
             <label for="userType">Tipo de usuario:</label>
             <select name="userType" id = "userType" class = "form-select">
                 <option value="boss">Jefe</option>
                 <option value="employee">Empleado</option>
             </select>
-            <button class = "btn btn-success" id = "btnLogin" type = "button">Iniciar sesion</button>
+            <button class = "btn btn-success" id = "btnLogin">Iniciar sesion</button>
             <p><center>¿No tienes una cuenta? <a href="/signup">Crea una ahora</a></center></p>
         </form>
     </main>

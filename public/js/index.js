@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnLogin = document.getElementById("btnLogin");
     const loginForm = document.getElementById("loginForm");
 
-    btnLogin.onclick = () => {
+    btnLogin.onclick = e => {
         const data = new FormData(loginForm);
         
         fetch('/login', {
@@ -34,5 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             })
             .catch (err => console.log(err));
+        
+        e.preventDefault();
     };
 });

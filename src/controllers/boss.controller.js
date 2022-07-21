@@ -74,14 +74,14 @@ class Boss {
         return false;
     }
 
-    async getProducts(bossId) {
-        const products = await this.pool.request()
-        .input("op", 5)
-        .input("ownerId", bossId)
-        .execute("sp_product")
+    // async getProducts(bossId) {
+    //     const products = await this.pool.request()
+    //     .input("op", 5)
+    //     .input("ownerId", bossId)
+    //     .execute("sp_product")
 
-        return products.recordset;
-    }
+    //     return products.recordset;
+    // }
 
     async getAllEmployees (bossId) {
         let employeesResult = await this.pool.request()

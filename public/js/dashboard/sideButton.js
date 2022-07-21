@@ -1,8 +1,8 @@
 export default class SideButton {
 
-    constructor (buttonId, titleElement, title, contentId, btnHandler) {
+    constructor (buttonId, titleElement, title, contentElement, btnHandler) {
         this.button = document.getElementById(buttonId);
-        this.contentElement = document.getElementById(contentId);
+        this.contentElement = contentElement;
         this.titleElement = titleElement;
         this.title = title;
         this.handlerEvent = btnHandler;
