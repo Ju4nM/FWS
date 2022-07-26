@@ -1,7 +1,7 @@
 import express from 'express';
 import CookieAuth from "../utils/cookieAuth.js";
 import Product from "../controllers/product.controller.js";
-import Boss from "../controllers/boss.controller.js";
+// import Boss from "../controllers/boss.controller.js";
 
 const router = express.Router();
 
@@ -13,9 +13,9 @@ router.post("/product/list", async(req, res) => {
     if (cookieIsExist) {
         
         let { lastProductId, rowCount, biggerThan } = req.body;
-        const { bossId } = cookieAuth.getData();
+        const { userId } = cookieAuth.getData();
 
-        let products = await Product.getProducts(bossId, lastProductId, rowCount, biggerThan);
+        let products = await Product.getProducts(userId, lastProductId, rowCount, biggerThan);
         res.json(products);
     } else {
 
@@ -31,9 +31,9 @@ router.post("/product/find", async (req, res) => {
     if (cookieIsExist) {
         
         let { valueToSearch, criteria } = req.body;
-        const { bossId } = cookieAuth.getData();
+        const { userId } = cookieAuth.getData();
 
-        let foundProducts = await Product.searchProduct(bossId, valueToSearch, criteria);
+        let foundProducts = await Product.searchProduct(userId, valueToSearch, criteria);
         res.json(foundProducts);
     } else {
 

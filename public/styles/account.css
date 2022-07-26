@@ -1,0 +1,113 @@
+
+body::-webkit-scrollbar {
+    appearance: none;
+    width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #0f0f0f;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    background-color: #0f0f0f;
+}
+
+.dataCard {
+    border: 1px solid black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding: 20px 0;
+}
+
+.cardContent {
+    margin-left: 50px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.cardContent div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cardContent input {
+    width: max-content;
+}
+
+.passwordSection > div > span {
+    height: 38px;
+    vertical-align: middle;
+    line-height: 38px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#copyId {
+    position: relative;
+}
+
+/* #copyId:hover::after {
+    content: "Copiar al portapapeles";
+    position: absolute;
+    background-color: #0f0f0f;
+    left: -500%;
+    top: 0;
+    white-space: nowrap;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+#copyId:hover::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: #0f0f0f;
+    transform: rotate(45deg);
+    top: 33%;
+    left: -45%;
+} */
+
+@media (max-width: 625px) {
+    
+    main {
+        width: 100%;
+    }
+
+    .cardContent {
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .cardContent input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    
+    .footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
+
+

@@ -4,16 +4,19 @@ import Validation from '../utils/fieldValidation.js';
 
 async function signup (req,res) {
     
+    for (let key in req.body) req.body[key] = req.body[key].trimEnd();
+
     let {signupName, signupLastName, signupSecondLastN, signupUserName, signupEmail, signupPasswd, signupUserType} = req.body
     
-    const validation = new Validation();
-    
-    validation.valNames(signupName, "nombre");
-    validation.valNames(signupLastName, "apellido paterno");
-    validation.valNames(signupSecondLastN, "apellido materno");
-    validation.valUserName(signupUserName);
-    validation.valEmail(signupEmail);
-    validation.valPassword(signupPasswd);
+    const validation = new Validation(signupUserType);
+        
+    await validation.valFields(signupName, signupLastName, signupSecondLastN, signupUserName, signupPasswd, signupEmail);
+    // validation.valNames(signupName, "nombre");
+    // validation.valNames(signupLastName, "apellido paterno");
+    // validation.valNames(signupSecondLastN, "apellido materno");
+    // validation.valUserName(signupUserName);
+    // validation.valEmail(signupEmail);
+    // validation.valPassword(signupPasswd);
 
     const errors = validation.getErrors();
 

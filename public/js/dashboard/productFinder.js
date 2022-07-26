@@ -57,7 +57,7 @@ export default class ProductFinder extends Product {
         
         this.spinner.showSpinner();
         this.productsSearched.innerHTML = "";
-        fetch("/product/find", {
+        fetch("/dashboard/product/find", {
             method: "POST",
             body: new URLSearchParams(bodyParams)
         })

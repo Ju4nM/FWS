@@ -90,7 +90,6 @@ main {
 
 .content::-webkit-scrollbar-thumb {
     background-color: #0f0f0f;
-    border-radius: 10px;
 }
 
 .box {
@@ -268,7 +267,7 @@ main {
         top: 0;
         bottom: 0;
         left: 0;
-        z-index: 4;
+        z-index: 1022;
         animation: sideBar .3s;
     }
 }

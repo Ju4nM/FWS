@@ -5,7 +5,7 @@ import Cipher from '../utils/Cipher.js';
 // console.log(result);
 
 /* 
- * sp_jefe options
+ * sp_employee options
  * 1 = Create (C)
  * 2 = Read (R)
  * 3 = Update (U)
@@ -17,6 +17,15 @@ import Cipher from '../utils/Cipher.js';
 class Employee {
     constructor (pool) {
         this.pool = pool;
+    }
+    
+    async getEmployeeData (employeeId) {
+        let employeeData = await this.pool.request()
+            .input("op", 2)
+            .input("id", employeeId)
+            .execute("sp_employee");
+
+        return employeeData.recordset;
     }
     
     async login (userName, plainPassword) {
@@ -32,7 +41,7 @@ class Employee {
             
             if (match) {
                 const sessid = await this.setSessId(employeeId, userName, password); // Set sessid
-                return {status: match, cookieData: sessid};
+                return { status: match, cookieData: sessid };
             }
         }
         
@@ -42,7 +51,7 @@ class Employee {
 
     async setSessId (employeeId, userName, password) {
         
-        let dataSessid = {userName, password, userType: "employee"}
+        let dataSessid = {userId: employeeId, userName, password, userType: "employee"}
         let sessid = Cipher.encrypt(JSON.stringify(dataSessid)); // session id creation for the cookie data
         
         await this.pool.request() // set session id in the database
@@ -66,16 +75,53 @@ class Employee {
         .input('email', signupEmail)
         .execute('sp_employee')
         
-        if (result.rowsAffected[0] == 1) {
-            return true;
-        }
+        // if (result.rowsAffected[0] == 1) {
+        //     return true;
+        // }
 
-        return false;
+        // return false;
+
+        return result.rowsAffected[0] == 1;
     }
 
-    // async getProducts() {
+    async emailExist (email) {
+        let result = await this.pool.request()
+            .input("email", email)
+            .query("SELECT * FROM employee WHERE email = @email");
+
+        return result.rowsAffected[0] == 1;
+    }    
+
+    async userNameExist (userName) {
+        let result = await this.pool.request()
+            .input("userName", userName)
+            .query("SELECT * FROM employee WHERE userName = @userName");
+
+        return result.rowsAffected[0] == 1;
+    }    
+
+    async updateData (data) {
         
-    // }
+        const { userId, name, lastName, secondLastName, userName, password, email } = data;
+        let result = await this.pool.request()
+            .input("name", name)
+            .input("lastName", lastName)
+            .input("secondLastName", secondLastName)
+            .input("userName", userName)
+            .input("password", password)
+            .input("email", email)  
+            .input("op", 3)
+            .input("id", userId)
+            .execute("sp_employee");
+
+        if (result.rowsAffected[0] === 1) {
+            let sessid = await this.setSessId(userId, userName);
+            return { status: true, sessid }
+        } else {
+            
+            return { status: false }
+        }
+    }
 }
 
 

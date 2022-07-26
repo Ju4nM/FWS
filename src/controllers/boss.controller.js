@@ -20,6 +20,15 @@ class Boss {
         this.pool = pool;
     }
     
+    async getBossData (bossId) {
+        let bossData = await this.pool.request()
+            .input("op", 2)
+            .input("id", bossId)
+            .execute("sp_boss");
+
+        return bossData.recordset;
+    }
+
     async login (userName, plainPassword) {
         const result = await this.pool.request() // obtain the user data
         .input('userName', userName)
@@ -33,7 +42,7 @@ class Boss {
             
             if (match) {
                 const sessid = await this.setSessId(bossId, userName, password); // Set sessid
-                return {status: match, cookieData: sessid};
+                return { status: match, cookieData: sessid };
             }
         }
         
@@ -41,9 +50,9 @@ class Boss {
         return {status: false, data: {}};
     }
 
-    async setSessId (bossId, userName, password) {
+    async setSessId (bossId, userName) {
         
-        let dataSessid = {bossId, userName, password, userType: "boss"}
+        let dataSessid = {userId: bossId, userName, userType: "boss"}
         let sessid = Cipher.encrypt(JSON.stringify(dataSessid)); // session id creation for the cookie data
         // console.log(sessid);
         await this.pool.request() // set session id in the database
@@ -67,21 +76,13 @@ class Boss {
         .input('email', signupEmail)
         .execute('sp_boss')
         
-        if (result.rowsAffected[0] == 1) {
-            return true;
-        }
+        // if (result.rowsAffected[0] == 1) {
+        //     return true;
+        // }
 
-        return false;
+        // return false;
+        return result.rowsAffected[0] == 1;
     }
-
-    // async getProducts(bossId) {
-    //     const products = await this.pool.request()
-    //     .input("op", 5)
-    //     .input("ownerId", bossId)
-    //     .execute("sp_product")
-
-    //     return products.recordset;
-    // }
 
     async getAllEmployees (bossId) {
         let employeesResult = await this.pool.request()
@@ -90,6 +91,45 @@ class Boss {
         .execute("sp_employee");
 
         return employeesResult.recordset;
+    }
+
+    async emailExist (email) {
+        let result = await this.pool.request()
+            .input("email", email)
+            .query("SELECT * FROM boss WHERE email = @email");
+
+        return result.rowsAffected[0] == 1;
+    }    
+
+    async userNameExist (userName) {
+        let result = await this.pool.request()
+            .input("userName", userName)
+            .query("SELECT * FROM boss WHERE userName = @userName");
+
+        return result.rowsAffected[0] == 1;
+    }    
+
+    async updateData (data) {
+        
+        const { userId, name, lastName, secondLastName, userName, password, email } = data;
+        let result = await this.pool.request()
+            .input("name", name)
+            .input("lastName", lastName)
+            .input("secondLastName", secondLastName)
+            .input("userName", userName)
+            .input("password", password)
+            .input("email", email)  
+            .input("op", 3)
+            .input("id", userId)
+            .execute("sp_boss");
+
+        if (result.rowsAffected[0] === 1) {
+            let sessid = await this.setSessId(userId, userName);
+            return { status: true, sessid }
+        } else {
+            
+            return { status: false }
+        }
     }
 }
 

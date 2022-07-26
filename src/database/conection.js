@@ -15,6 +15,7 @@ export default async function getConnection () {
     
     try {
         const pool = await sql.connect(sqlConfig);
+        
         return pool;        
     } catch (error) {
         console.log(error);

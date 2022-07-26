@@ -13,7 +13,7 @@ export default class Message {
 
     show (message) {
         
-        this.overlay.style.display = "grid";
+        this.overlay.style.display = "";
         this.message.lastElementChild.innerHTML = message;
         this.message.style.display = "";
     }
@@ -30,7 +30,7 @@ export default class Message {
         errorTemplate += "</ul>";
 
         this.message.lastElementChild.innerHTML = errorTemplate;
-        this.overlay.style.display = "grid";
+        this.overlay.style.display = "";
         this.message.style.display = "";
     }
 }

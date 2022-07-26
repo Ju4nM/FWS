@@ -9,7 +9,7 @@ export default class Product {
         div.setAttribute("class", "d-flex justify-content-between gap-2 align-items-center px-2");
 
         const link = document.createElement("a");
-        link.setAttribute("href", `/product/${productId}`);
+        link.setAttribute("href", `/dashboard/product/${productId}`);
         link.setAttribute("class", "productLink");
         link.setAttribute("target", "_blank");
         link.textContent = productName;
@@ -41,7 +41,7 @@ export default class Product {
             <p><span class = "text-warning fw-bold">Expira: </span> ${expirationDate}</p>
             <p><span class = "text-success fw-bold">Precio: </span>$${unitPrice}</p>
         `;
-        tagDescription.textContent = description;
+        tagDescription.innerHTML = description;
         tagSolutions.textContent = solutions;
         
         firstInnerDiv.appendChild(tagDescription);

@@ -1,19 +1,19 @@
 import Cryptr from 'cryptr';
-import bcrypt from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 
 class Cipher {
 
     constructor (saltRounds) {
         this.saltRounds = saltRounds;
-        this.crypt = new Cryptr("MySecretKey");
+        this.crypt = new Cryptr("$2b$08$9GndkNpfMEUZDFq3BCdTyOSziATRmMpk1s/Nmm0rg4IzO0zFKqInm");
     }
 
     async hash (plainText) {
-        return await bcrypt.hash(plainText, this.saltRounds);
+        return await hash(plainText, this.saltRounds);
     }
 
     async compareHashes (plainText, hash) {
-        return await bcrypt.compare(plainText, hash);
+        return await compare(plainText, hash);
     }
 
     // AES cipher functions
@@ -22,7 +22,14 @@ class Cipher {
     }
 
     decrypt (hash) {
-        return this.crypt.decrypt(hash);
+
+        // if cryptr can't decrypt the hash then throws an error and stops the server
+        try {
+            return this.crypt.decrypt(hash);
+        } catch (error) {
+            // console.log(error)
+            return {};
+        }
     }
 }
 

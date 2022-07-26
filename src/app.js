@@ -5,7 +5,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import posts from './routes/posts.js';
 import dashRoutes from "./routes/dashRoutes.js";
-import productRoutes from "./routes/productRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express();
 
@@ -21,6 +21,6 @@ app.set("port", config.port)
 // Routes
 app.use("/", dashRoutes);
 app.use("/", posts);
-app.use("/", productRoutes);
+app.use("/", dashboardRoutes);
 
 export default app;

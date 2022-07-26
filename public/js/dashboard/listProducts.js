@@ -40,7 +40,7 @@ export default class ListProducts extends Product {
         this.spinner.showSpinner();
         this.requestConfig.rowCount = all ? 0 : this.rowCount;
         
-        fetch("/product/list", {
+        fetch("/dashboard/product/list", {
             method: "POST",
             body: new URLSearchParams({biggerThan: biggerThan, ...this.requestConfig})
         })
@@ -62,10 +62,13 @@ export default class ListProducts extends Product {
                     }
                     
                     this.renderProducts(res);
-                } else {
+                } 
+                
+                if (!res.length > 0 || res.length < this.rowCount) {
                     
                     this.spinner.setText(this.listProducts.childElementCount > 0 ? "No hay m&aacute;s productos para mostrar" : "No hay productos para mostrar");
                     this.spinner.showText();
+                    this.isRendered = false;
                 }
             })
     }

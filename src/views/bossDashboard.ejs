@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/overlay.css">
+    <link rel="stylesheet" href="/styles/overlay.css">
     <link rel="stylesheet" href="/styles/dashboard.css">
-    <!-- <link rel="stylesheet" href="/styles/style.css"> -->
     <script src="https://kit.fontawesome.com/5128f6ea7d.js" crossorigin="anonymous"></script>
-    <script src="./js/dashboard/dashboard.js" type = "module"></script>
-    <title>Panel de control</title>
+    <script src="/js/dashboard/dashboard.js" type = "module"></script>
+    <link rel="icon" href="/img/favicon.svg">
+    <title>FWS - Panel de control</title>
 </head>
 <body>
     <main>
@@ -112,7 +112,7 @@
         <div class="account" id = "windowAccount" style = "display: none;">
             <div class="header mb-3"><h3><%= userName %></h3><input type="button" id="closeWindow" class="btn-close"></div>
             <div class = "controls">
-                <a href="/dashboard/account" target="_blank" class = "btn btn-primary">Cuenta</a>
+                <a href="/dashboard/account" class = "btn btn-primary">Cuenta</a>
                 <a href="/logout" class="btn btn-danger">Cerrar sesion</a>
                 <!-- <button id="logout" class="btn btn-danger">Cerrar sesion</button> -->
             </div>

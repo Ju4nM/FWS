@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/5128f6ea7d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/styles/overlay.css">
+        <link rel="stylesheet" href="/styles/account.css">
+        <script src="/js/account/account.js" type = "module"></script>
+        <link rel="icon" href="/img/favicon.svg">
+        <title>FWS - Account</title>
+    </head>
+    <body>
+        <nav class="py-2 px-3 d-flex gap-3 justify-content-between sticky-top"><a href = "/dashboard" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i> Volver</a><a href = "/logout" class = "btn btn-outline-danger">Cerrar sesion</a></nav>
+        <main>
+            <form id = "formUserData">
+                <div class = "dataCard">
+                    <div class="header pb-3">
+                        <h3 class = "fw-bold text-start">Informacion del usuario</h3>
+                        <button class = "btn btn-outline-primary" type = "button" id = "editUserInf"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class = "cardContent">
+                        <div>
+                            <span class = "fw-bold">Nombre(s):</span><input type="text" name = "name" disabled class = "form-control" value = "<%= name %>" placeholder="Nombre(s)">
+                        </div>
+                        <div>
+                            <span class = "fw-bold text-nowrap">Apellido paterno:</span><input type="text" name = "lastName" disabled class = "form-control" value = "<%= lastName %>" placeholder="Apellido paterno">
+                        </div>
+                        <div>
+                            <span class = "fw-bold text-nowrap">Apellido materno:</span><input type="text" name = "secondLastName" disabled class = "form-control" value = "<%= secondLastName %>" placeholder="Apellido materno">
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "dataCard">
+                    <div class="header pb-3 text-start">
+                        <h3 class = "fw-bold">Informacion de inicio de sesion</h3>
+                        <button class = "btn btn-outline-primary" type = "button" id = "editSessionInf"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class = "cardContent">
+                        <div>
+                            <span class = "fw-bold">Usuario:</span><input type="text" name = "userName" disabled class = "form-control" value = "<%= userName %>" placeholder="Nombre de usuario"> 
+                        </div>
+                        <div class="d-flex align-items-start passwordSection">
+                            <div>
+                                <span class = "fw-bold text-nowrap">Contrase&ntilde;a:</span>
+                            </div>
+                            <div class = "d-flex flex-column">
+                                <input type="password" name = "password" class = "form-control" value = "********" disabled placeholder="Contrase&ntilde;a">
+                                <input type="password" name = "repeatedPassword" class = "form-control" disabled placeholder="Repita contrase&ntilde;a" style = "display: none;">
+                            </div>
+                            <button class="btn btn-warning" id = "editPassword" type = "button"><i class="fa-solid fa-pen-to-square"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dataCard">
+                    <div class = "header pb-3 text-start">
+                        <h3 class = "fw-bold">Informacion de contacto</h3>
+                        <button class = "btn btn-outline-primary" type = "button" id = "editContactInf"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class = "cardContent">
+                        <div>
+                            <span class = "fw-bold text-nowrap">Correo:</span><input type="text" name = "email" class = "form-control" value = "<%= email %>" disabled placeholder="Correo">
+                        </div>
+                    </div>
+                </div>
+                <input type="text" id="isBoss" value = "<%= isBoss %>" style = "display: none;">
+                <% if (!isBoss) { %>
+                    <input type="text" id="hasJob" value = "<%= bossId !== null %>" style = "display: none;">
+                    <% if (bossId == null) { %>
+                        <div class="dataCard">
+                            <div class="header pb-3 text-start">
+                                <h3 class="fw-bold">ID de empleado</h3>
+                                <button class="btn btn-outline-success" type = "button" id = "copyId"><i class="fa-regular fa-clipboard"></i></button>
+                            </div>
+                            <div class="cardContent">
+                                <div>
+                                    <span class = "fw-bold text-nowrap">ID: </span> <span class = "overflow-auto"><%= userId %></span>
+                                    <input type="text" id="employeeId" disabled style = "display: none;" value = "<%= userId %>">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+
+                        <div class="dataCard">
+                            <div class = "header pb-3 text-start">
+                                <h3 class = "fw-bold">Dejar empleo</h3>
+                                <button class = "btn btn-outline-danger">Dejar</button>
+                            </div>
+                        </div>
+
+                    <% } %>
+                <% } %>
+                <div class="py-3">
+                    <div class = "footer mb-3">
+                        <div class = "mb-1">
+                            <span class = "text-nowrap">Cuenta creada el: </span><span class="text-primary fw-bold"><%= creationDate %></span>
+                        </div>
+                        <div>
+                            <button class = "btn btn-success" disabled id = "saveButton" type = "input">Guardar</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-danger">Eliminar cuenta</button>
+                </div>
+            </form>
+        </main>
+        <div class="overlay" style = "display: none;">
+            <div id = "message" class="msg" style = "display: none;"> 
+                <div class="header mb-3"><span>Alerta </span><input type="button" id="closeMsg" class="btn-close"></div>
+                <p></p>
+            </div>
+            <div class="msg" id = "modalInput" style="display: none;">
+                <form>
+                    <div class="header mb-3"><span class = "fw-bold">Confirmaci&oacute;n: </span><input type="button" id="closeModal" class="btn-close" /></div>
+                    <p class = "fw-bold">Escriba su contrase&ntilde;a actual para confirmar los cambios:</p>
+                    <input type="password" id = "modalField" class = "form-control" placeholder="Contrase&ntilde;a">
+                    <div class="d-flex justify-content-end mt-3"><button type = "input" id = "modalButton" class="btn btn-success">Confirmar</button></div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
