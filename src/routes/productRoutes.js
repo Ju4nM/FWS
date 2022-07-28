@@ -30,10 +30,10 @@ router.post("/product/find", async (req, res) => {
     
     if (cookieIsExist) {
         
-        let { valueToSearch, criteria } = req.body;
+        let { valueToSearch, criteria, lastId, rowCount, biggerThan } = req.body;
         const { userId } = cookieAuth.getData();
 
-        let foundProducts = await Product.searchProduct(userId, valueToSearch, criteria);
+        let foundProducts = await Product.searchProduct(userId, valueToSearch, criteria, lastId, rowCount, biggerThan);
         res.json(foundProducts);
     } else {
 

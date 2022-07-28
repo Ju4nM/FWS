@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let spinner = new Spinner("spinner", "spinnerText");
 
     let listProducts = new ListProducts("listProducts", sectionProducts, spinner);
-    new ProductFinder("toSearch", "searchCriteria", "btnFinder", listProducts, spinner);
+    new ProductFinder("toSearch", "searchCriteria", "btnFinder", sectionProducts, listProducts, spinner);
     let currentActive;
     
     const title = document.getElementById("title");

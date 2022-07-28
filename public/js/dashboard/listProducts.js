@@ -8,12 +8,13 @@ export default class ListProducts extends Product {
         this.spinner = spinner;
         this.sectionProducts = sectionProducts;
         this.dataProducts = [];
-        this.rowCount = 54;
+        this.rowCount = 12;
         this.requestConfig = {
             rowCount: this.rowCount,
             lastProductId: 0
         };
         this.isRendered = false;
+        this.searchStarted = false;
 
         this.getData(true);
         this.#eventListeners();
@@ -27,7 +28,7 @@ export default class ListProducts extends Product {
             let productsIsActive = this.sectionProducts.style.display != "none";
             let isDisplayingProducts = this.listProducts.style.display != "none";
             
-            if (isTheEnd && this.isRendered && productsIsActive && isDisplayingProducts) {
+            if (isTheEnd && this.isRendered && productsIsActive && isDisplayingProducts && !this.searchStarted) {
                 this.isRendered = false;
                 this.getData();
             }
@@ -60,7 +61,7 @@ export default class ListProducts extends Product {
                         let lastId = this.dataProducts[this.dataProducts.length - 1].productId;
                         this.requestConfig.lastProductId = lastId;
                     }
-                    
+                    console.log(this.requestConfig.lastProductId);
                     this.renderProducts(res);
                 } 
                 
@@ -76,7 +77,7 @@ export default class ListProducts extends Product {
     renderProducts (dataProducts) {
 
         dataProducts.forEach(product => {
-            let {productName, stock, description, solutions} = product;
+            // let {productName, stock, description, solutions} = product;
             
             const card = this.createCard(product);
 
