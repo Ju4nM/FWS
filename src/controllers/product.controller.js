@@ -31,17 +31,19 @@ class Product {
         // console.log(products);
         let foundProducts = [];
 
-        products.forEach(product => {
+        for (let i = 0; i < products.length; i++) {
+            let product = products[i];
+
+            let match = this.#findMatch(product, criteria, valueToSearch.trim()); // Find match in all products
             
-            let match = this.#findMatch(product, criteria, valueToSearch.trim());
-            
-            if (match) foundProducts.push(product);
-        });
-        // console.log("Productos encontrados: ");
-        // console.log(foundProducts);
+            if (match) {
+
+                foundProducts.push(product);
+            }
+        }
+
         let returned = rowCount != 0 ? foundProducts.slice(0, rowCount > foundProducts.length ? foundProducts.length : rowCount) : foundProducts;
-        console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        console.log(returned);
+        
         return returned;
     }
 

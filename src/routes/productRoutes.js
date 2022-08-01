@@ -13,10 +13,23 @@ router.post("/product/list", async(req, res) => {
     if (cookieIsExist) {
         
         let { lastProductId, rowCount, biggerThan } = req.body;
-        const { userId } = cookieAuth.getData();
+        const cookieData = cookieAuth.getData();
+        const { userId, userType } = cookieData;
 
-        let products = await Product.getProducts(userId, lastProductId, rowCount, biggerThan);
-        res.json(products);
+        if (userType === "boss") {
+
+            let products = await Product.getProducts(userId, lastProductId, rowCount, biggerThan);
+            res.json(products);
+        } else if (userType === "employee") {
+            
+            const { bossId } = cookieData;
+            let products = {};
+            if (bossId !== null) {
+                products = await Product.getProducts(bossId, lastProductId, rowCount, biggerThan);
+            }
+            res.json(products)
+        }
+
     } else {
 
         res.sendStatus(404);

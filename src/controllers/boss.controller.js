@@ -84,15 +84,6 @@ class Boss {
         return result.rowsAffected[0] == 1;
     }
 
-    async getAllEmployees (bossId) {
-        let employeesResult = await this.pool.request()
-        .input("op", 7)
-        .input("bossId", bossId)
-        .execute("sp_employee");
-
-        return employeesResult.recordset;
-    }
-
     async emailExist (email) {
         let result = await this.pool.request()
             .input("email", email)

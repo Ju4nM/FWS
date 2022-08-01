@@ -1,14 +1,16 @@
 import SideButton from "./sideButton.js";
 import HamburgerMenu from "./navbarMenu.js";
 import ListProducts from "./listProducts.js";
+import ListEmployees from "./listEmployees.js";
 import ProductFinder from "./productFinder.js";
 import Spinner from "./spinner.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    const userType = document.getElementById("userType").value;
+    
     let sectionProducts = document.getElementById("products");
-    let sectionEmployees = document.getElementById("employees");
     let spinner = new Spinner("spinner", "spinnerText");
 
     let listProducts = new ListProducts("listProducts", sectionProducts, spinner);
@@ -32,10 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
     
     currentActive = btnProducts;
 
-    const btnEmployees = new SideButton("btnEmployees", title, "Empleados", sectionEmployees, () => {
-        currentActive.hideContent();
-        currentActive = btnEmployees;
-    });
+    if (userType === "boss") {
+        let sectionEmployees = document.getElementById("employees");
+        const btnEmployees = new SideButton("btnEmployees", title, "Empleados", sectionEmployees, () => {
+            currentActive.hideContent();
+            currentActive = btnEmployees;
+        });
+
+        let listEmployees = new ListEmployees ("employeeTable");
+    }
     
     function btnAccountHandler () {
         let windowStatus = windowAccount.style.display == "none";

@@ -20,7 +20,7 @@ export default class Message {
 
     showErrors (errors) {
         let errorTemplate = "<ul style = \"color: red\">"
-        console.log(errors);
+        
         errorTemplate += errors.reduce((acc, item) => {
             return acc += `
                 <li>${item}</li>

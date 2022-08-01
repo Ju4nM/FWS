@@ -19,6 +19,15 @@ class Employee {
         this.pool = pool;
     }
     
+    async getAllEmployees (bossId) {
+        let employeesResult = await this.pool.request()
+        .input("op", 7)
+        .input("bossId", bossId)
+        .execute("sp_employee");
+
+        return employeesResult.recordset;
+    }
+    
     async getEmployeeData (employeeId) {
         let employeeData = await this.pool.request()
             .input("op", 2)
@@ -36,11 +45,11 @@ class Employee {
             
         if (result.rowsAffected == 1) { 
             
-            const { employeeId, password } = result.recordset[0];
+            const { employeeId, password, bossId } = result.recordset[0];
             let match = await Cipher.compareHashes(plainPassword, password); // compares the plainPassword with database password
             
             if (match) {
-                const sessid = await this.setSessId(employeeId, userName, password); // Set sessid
+                const sessid = await this.setSessId(employeeId, userName, bossId); // Set sessid
                 return { status: match, cookieData: sessid };
             }
         }
@@ -49,9 +58,9 @@ class Employee {
         return {status: false, data: {}};
     }
 
-    async setSessId (employeeId, userName, password) {
+    async setSessId (employeeId, userName, bossId) {
         
-        let dataSessid = {userId: employeeId, userName, password, userType: "employee"}
+        let dataSessid = {userId: employeeId, userName, bossId, userType: "employee"}
         let sessid = Cipher.encrypt(JSON.stringify(dataSessid)); // session id creation for the cookie data
         
         await this.pool.request() // set session id in the database
@@ -121,6 +130,15 @@ class Employee {
             
             return { status: false }
         }
+    }
+
+    async uncouple (employeeId, bossId) {
+        const isUncoupled = await this.pool.request()
+            .input("bossId", bossId)
+            .input("employeeId", employeeId)
+            .execute("sp_uncoupleEmployee");
+        console.log(isUncoupled);
+        return isUncoupled.rowsAffected[1] === 1;
     }
 }
 

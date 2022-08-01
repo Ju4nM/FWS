@@ -39,15 +39,15 @@ export default class ProductFinder extends Product {
             }
         }
 
-        this.criteria.oninput = () => {
+        this.criteria.addEventListener("input", () => {
             if (this.input.value !== "") {
-                this.#searchValue();
                 this.lastId = 0;
+                this.#searchValue();
                 this.searchStarted = true;
                 this.listProducts.searchStarted = true;
                 content.addEventListener("scroll", () => this.#eventForContent(content));
             }
-        }
+        });
 
         this.endSearching.onclick = (e) => {
 
@@ -69,7 +69,6 @@ export default class ProductFinder extends Product {
         let productsIsActive = this.sectionProducts.style.display != "none";
         let isDisplayingProducts = this.productsSearched.style.display != "none";
         if (isTheEnd && this.isRendered && productsIsActive && isDisplayingProducts && this.searchStarted) {
-            console.log("Hola")
             this.isRendered = false;
             this.#searchValue();
         }
@@ -104,7 +103,6 @@ export default class ProductFinder extends Product {
                 this.renderProducts(res);
                 this.lastId = res[res.length - 1].productId;
             } else {
-                console.log("NO hay nada");
                 this.spinner.setText("No se encontraron coincidencias");
                 this.spinner.showText();
             }

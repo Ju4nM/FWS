@@ -1,13 +1,15 @@
 import express from 'express';
 import CookieAuth from "../utils/cookieAuth.js";
-import productRoutes from "./productRoutes.js";
 import updateData from "../controllers/updateData.js";
 import Boss from '../controllers/boss.controller.js';
 import Employee from '../controllers/employee.controller.js';
+import productRoutes from "./productRoutes.js";
+import employeeRoutes from "./employeeRoutes.js";
 
 const router = express.Router();
 
 router.use("/dashboard", productRoutes);
+router.use("/dashboard", employeeRoutes);
 
 router.get("/dashboard/account", async (req, res) => {
 

@@ -12,25 +12,19 @@ export default async function dashboard (req, res) {
         res.redirect("/");
     } else {
 
-        let cookieData = cookieAuth.getData();
-        let resView;
-        let data = {userName: cookieData.userName};
+        let { userType, userName } = cookieAuth.getData();
+        let data = {userName, userType};
         
-        if (cookieData.userType === "boss") {
+        // if (userType === "boss") {
 
-            resView = "bossDashboard";
-            // let products = await Product.getProducts(cookieData.bossId);
-            let employees = await Boss.getAllEmployees(cookieData.bossId);
-            // data.products = products;
-            data.employees = employees;
-        } else if (cookieData.userType == "employee") {
+        //     data.employees = employees;
+        // } else if (userType !== "employee") {
             
-            resView = "employeeDashboard";
-        } else {
-            res.redirect("/");
-        }
+            // resView = "employeeDashboard";
+            // res.redirect("/");
+        // }
         
         // console.log(data);
-        res.render(resView, data);
+        res.render("dashboard", data);
     }
 }

@@ -163,7 +163,7 @@ main {
 }
 
 .productLink {
-    color: white;
+    color: #000;
     text-decoration: none;
     transition: .4s;
 }
@@ -208,6 +208,10 @@ main {
     box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     margin-bottom: 10px;
+}
+
+.data-employee {
+    line-height: 35px;
 }
 
 @keyframes sideBar {

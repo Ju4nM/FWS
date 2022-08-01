@@ -61,7 +61,7 @@ export default class ListProducts extends Product {
                         let lastId = this.dataProducts[this.dataProducts.length - 1].productId;
                         this.requestConfig.lastProductId = lastId;
                     }
-                    console.log(this.requestConfig.lastProductId);
+                    // console.log(this.requestConfig.lastProductId);
                     this.renderProducts(res);
                 } 
                 
