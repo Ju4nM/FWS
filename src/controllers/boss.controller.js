@@ -102,7 +102,8 @@ class Boss {
 
     async updateData (data) {
         
-        const { userId, name, lastName, secondLastName, userName, password, email } = data;
+        let { userId, name, lastName, secondLastName, userName, password, email } = data;
+        password = await Cipher.hash(password);
         let result = await this.pool.request()
             .input("name", name)
             .input("lastName", lastName)

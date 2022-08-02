@@ -46,8 +46,30 @@ export default async function updateData (req, res) {
         } else {
             await validation.valEmail(data.email);
         }
-
         userData.email = data.email;
+    }
+
+    if (data.hasOwnProperty("userName")) {
+        if (data.userName === userData.userName) {
+            errors.push("El nombre de usuario es el mismo");
+        } else {
+            await validation.valUserName(data.email);
+        }
+        userData.userName = data.userName;
+    }
+
+    if (data.hasOwnProperty("password")) {
+        if (data.password === userData.password) {
+            errors.push("La contraseña es la misma");
+            if (data.password != data.repeatedPassword) {
+                errors.push("Las contraseñas escritas no coinciden")
+            }
+        } else {
+            validation.valPassword(data.password);
+        }
+        userData.password = data.password;
+        console.log(data.password);
+        console.log(userData);
     }
     
     errors = errors.concat(validation.getErrors());
