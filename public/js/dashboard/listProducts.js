@@ -1,14 +1,12 @@
-import Product from "./product.js";
-
-export default class ListProducts extends Product {
+export default class ListProducts {
     
-    constructor (listProductsId, sectionProducts, spinner) {
-        super();
+    constructor (listProductsId, sectionProducts, spinner, productObject) {
         this.listProducts = document.getElementById(listProductsId);
         this.spinner = spinner;
         this.sectionProducts = sectionProducts;
         this.dataProducts = [];
         this.rowCount = 12;
+        this.product = productObject;
         this.requestConfig = {
             rowCount: this.rowCount,
             lastProductId: 0
@@ -22,7 +20,6 @@ export default class ListProducts extends Product {
 
     #eventListeners () {
         let content = this.sectionProducts.parentElement.parentElement;
-        
         content.onscroll = () => {
             let isTheEnd = content.offsetHeight + content.scrollTop >= content.scrollHeight;
             let productsIsActive = this.sectionProducts.style.display != "none";
@@ -79,7 +76,7 @@ export default class ListProducts extends Product {
         dataProducts.forEach(product => {
             // let {productName, stock, description, solutions} = product;
             
-            const card = this.createCard(product);
+            const card = this.product.createCard(product);
 
             this.listProducts.appendChild(card);
         });

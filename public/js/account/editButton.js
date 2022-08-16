@@ -37,7 +37,7 @@ export default class EditButton {
     }
 
     lock () {
-        if (this.isEditing) this.toggle();
+        if (this.isEditing) this.editButton.click();
     }
 
     getStatus () {

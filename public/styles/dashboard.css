@@ -133,6 +133,35 @@ main {
     align-items: center;
 }
 
+.cartList {
+    width: 80%;
+}
+
+.cartCard {
+    /* display: grid; */
+    width: min-content;
+    gap: 30px;
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* place-items: center; */
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dataCard {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    place-items: end;
+    gap: 20px;
+}
+
+.cardControls {
+    display: flex;
+    gap: 10px;
+}
+
 /* ---------------------------------------------------------------------- */
 
 .listProducts {
@@ -273,5 +302,37 @@ main {
         left: 0;
         z-index: 1022;
         animation: sideBar .3s;
+    }
+   
+}
+
+@media (max-width: 715px) {
+
+    .dataCard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cardControls {
+        display: grid;
+        grid-template-columns: 1fr;
+        /* grid-auto-columns: 1fr; */
+        place-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    
+    .cartCard {
+        gap: 20px;
+    }
+
+    .cardControls {
+        display: flex;
+    }
+    
+    .cartCard {
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
     }
 }

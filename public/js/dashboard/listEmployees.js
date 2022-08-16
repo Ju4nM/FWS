@@ -1,5 +1,6 @@
 import Message from "../message.js"
 import ModalInput from "../modalInput.js";
+import Spinner from "./spinner.js";
 
 export default class ListEmployees {
 
@@ -8,11 +9,12 @@ export default class ListEmployees {
         this.tableBody = this.table.querySelector("tbody");
         this.modalInput = new ModalInput("modalInput", "modalField", "modalButton", "closeModal")
         this.message = new Message("message", "closeMsg");
+        this.spinner = new Spinner("employeeSpinner", "employeeSpinnerText");
         this.loadData();
     }
 
     loadData () {
-
+        this.spinner.showSpinner();
         fetch ("/dashboard/getEmployeeData")
             .then(response => {
                 if (response.ok) {
@@ -22,8 +24,16 @@ export default class ListEmployees {
                 }
             })
             .then(res => {
-                this.showRows(res);
-            });
+                if (res.length > 0) {
+                    this.table.style.display = "";
+                    this.showRows(res);
+                } else {
+                    // console.log("No hay empleados");
+                    this.spinner.setText("No se han encontrado empleados para mostrar");
+                    this.spinner.showText();
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     showRows (data) {
@@ -47,6 +57,7 @@ export default class ListEmployees {
             fragment.appendChild(tr);
         }
         this.tableBody.appendChild(fragment);
+        this.spinner.hide();
     }
 
     createUncoupleButton (employeeName, employeeId) {
@@ -59,10 +70,9 @@ export default class ListEmployees {
 
         button.addEventListener("click", () => {
             let row = button.parentElement.parentElement;
-            let msg = "Mensaje";
             this.modalInput.confirm(`¿Esta segur@ de que desea desacoplar a ${employeeName}?`)
                 .then(() => {
-                    let isUncoupled = this.uncoupleEmployee(employeeId, row);
+                    this.uncoupleEmployee(employeeId, row);
                 });
         });
 

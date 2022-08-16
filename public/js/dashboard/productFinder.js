@@ -1,9 +1,7 @@
-import Product from "./product.js";
 
-export default class ProductFinder extends Product {
+export default class ProductFinder {
 
-    constructor (inputId, criteriaId, btnFinderId, sectionProducts, listProducts, spinner) {
-        super();
+    constructor (inputId, criteriaId, btnFinderId, sectionProducts, listProducts, spinner, productObject) {
         this.input = document.getElementById(inputId);
         this.sectionProducts = sectionProducts;
         this.criteria = document.getElementById(criteriaId);
@@ -18,6 +16,7 @@ export default class ProductFinder extends Product {
         this.rowCount = 12;
         this.lastId = 0;
 
+        this.product = productObject;
         this.#eventListeners();
     }
 
@@ -115,7 +114,7 @@ export default class ProductFinder extends Product {
         dataProducts.forEach(product => {
             // let {productName, stock, description, solutions} = product;
             
-            const card = this.createCard(product);
+            const card = this.product.createCard(product);
             
             this.productsSearched.appendChild(card);
         });

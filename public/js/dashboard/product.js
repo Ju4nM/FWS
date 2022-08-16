@@ -1,6 +1,18 @@
+import ButtonAdd from "./addProduct.js";
+
 export default class Product {
 
-    createCard ({ productId, productName, stock, description, solutions, unitPrice, expirationDate }) {
+    constructor (shoppingCart) {
+        this.shoppingCart = shoppingCart;
+        this.products = {};
+    }
+
+    createCard (productData) {
+        let { productId, productName, stock, description, solutions, unitPrice, expirationDate } = productData;
+
+        if (this.products[productId]) {
+            return this.products[productId];
+        }
         const card = document.createElement("div");
         card.setAttribute("class", "productCard");
         
@@ -54,10 +66,14 @@ export default class Product {
         // Buttons
         div = document.createElement("div");
         div.setAttribute("class", "d-flex justify-content-end gap-2");
-        div.innerHTML = '<button class="btn btn-primary">Agregar</button><button class="btn btn-danger">Borrar</button>'
-        
+        // div.innerHTML = '<button class="btn btn-primary">Agregar</button><button class="btn btn-danger">Borrar</button>'
+        const buttonAdd = new ButtonAdd(this.shoppingCart, productData);
+        this.shoppingCart.addCardButton(productId, buttonAdd);
+        div.appendChild(buttonAdd.createButton());
         card.appendChild(div);
         
+        this.products[productId] = card;
         return card;
     }
+
 }
