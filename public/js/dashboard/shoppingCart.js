@@ -55,6 +55,7 @@ export default class ShoppingCart {
         controls.appendChild(this.createControls(productId));
         cartCard.appendChild(controls);
         data.stockTag = cartCard.firstElementChild.lastElementChild.previousElementSibling.lastElementChild;
+        data.priceTag = cartCard.firstElementChild.lastElementChild.lastElementChild;
         data.cartCard = cartCard;
         
         this.list.appendChild(cartCard);

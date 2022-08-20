@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/Ju4nM/FWS/issues"
   },
-  "homepage": "https://github.com/Ju4nM/FWS#readme"
+  "homepage": "https://github.com/Ju4nM/FWS#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }
