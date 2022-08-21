@@ -59,7 +59,19 @@ class Product {
         }
         
         return false;
+    
+    }
+
+    async delete(ownerId, productId) {
+        let result = await this.pool.request()
+        .input("op", 4)
+        .input("ownerId", ownerId)
+        .input("productId", productId)
+        .execute("sp_product");
+        return result.rowsAffected [0] === 1;
     }
 }
+
+
 
 export default new Product(await getConnection());

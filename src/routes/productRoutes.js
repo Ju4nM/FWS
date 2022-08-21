@@ -54,4 +54,26 @@ router.post("/product/find", async (req, res) => {
     }
 });
 
+router.post("/product/delete", async (req, res) =>{
+    const cookieAuth = new CookieAuth(req.cookies);
+    const cookieIsExist = await cookieAuth.auth();
+    if (cookieIsExist) {
+       let {productId} = req.body   
+        const cookieData = cookieAuth.getData();
+        if (cookieData.userType === "boss") {
+            let {userId} = cookieData
+            let result = await Product.delete(userId, productId);
+        if (result){
+            res.json({status:true, msg:"Se a borrado correctamente"});
+        }else{
+            res.json({status:false, msg:"A ocurrido un error al borrarlo"});
+        }
+        }
+        else {
+            res.json({status:false, msg:"No se puede borrar el Producto"});
+
+        }
+    }
+})
+
 export default router;

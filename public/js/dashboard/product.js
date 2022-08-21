@@ -1,4 +1,5 @@
 import ButtonAdd from "./addProduct.js";
+import ButtonDelete from "./buttonDelete.js";
 
 export default class Product {
 
@@ -68,8 +69,10 @@ export default class Product {
         div.setAttribute("class", "d-flex justify-content-end gap-2");
         // div.innerHTML = '<button class="btn btn-primary">Agregar</button><button class="btn btn-danger">Borrar</button>'
         const buttonAdd = new ButtonAdd(this.shoppingCart, productData);
+        const buttonDelete = new ButtonDelete(productId, card);
         this.shoppingCart.addCardButton(productId, buttonAdd);
         div.appendChild(buttonAdd.createButton());
+        div.appendChild(buttonDelete.createButton());
         card.appendChild(div);
         
         this.products[productId] = card;
