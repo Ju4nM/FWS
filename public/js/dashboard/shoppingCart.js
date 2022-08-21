@@ -82,8 +82,8 @@ export default class ShoppingCart {
         buttonAdd.textContent = "+1";
 
         // Event listeners
-        buttonAdd.addEventListener("click", () => this.addOne(productId, true));
-        buttonRemove.addEventListener("click", () => this.removeOne(productId));
+        buttonAdd.addEventListener("click", () => this.addOne(buttonAdd, productId, true));
+        buttonRemove.addEventListener("click", () => this.removeOne(buttonAdd, productId));
         buttonDelete.addEventListener("click", () => this.deleteProduct(productId));
 
         controls.appendChild(buttonDelete);
@@ -93,20 +93,26 @@ export default class ShoppingCart {
         return controls;
     }
 
-    addOne (productId, fromCart = false) {
+    addOne (buttonAdd, productId, fromCart = false) {
         this.addedProducts[productId].stock++;
+        if (this.addedProducts[productId].stock === this.addedProducts[productId].stockLimit) buttonAdd.setAttribute("disabled", "true");
         if (fromCart) this.buttons[productId].addOne();
         this.addedProducts[productId].stockTag.textContent = this.addedProducts[productId].stock;
+        let currentPrice = this.addedProducts[productId].stock * this.addedProducts[productId].unitPrice;
+        this.addedProducts[productId].priceTag.textContent = `$${currentPrice}`;
     }
     
-    removeOne (productId) {
+    removeOne (buttonAdd, productId) {
         if (this.addedProducts[productId].stock == 1) {
             this.deleteProduct(productId);
             return;
         }
         this.addedProducts[productId].stock--;
+        if (this.addedProducts[productId].stock < this.addedProducts[productId].stockLimit) buttonAdd.removeAttribute("disabled");
         this.buttons[productId].remove(1);
         this.addedProducts[productId].stockTag.textContent = this.addedProducts[productId].stock;
+        let currentPrice = this.addedProducts[productId].stock * this.addedProducts[productId].unitPrice;
+        this.addedProducts[productId].priceTag.textContent = `$${currentPrice}`;
     }
 
     deleteProduct (productId) {

@@ -243,6 +243,15 @@ main {
     line-height: 35px;
 }
 
+.cart {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#cartList {
+    width: max-content;
+}
+
 @keyframes sideBar {
     0% {
         transform: translateX(-70px);
