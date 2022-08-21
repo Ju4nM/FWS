@@ -71,6 +71,24 @@
                     <div class="spinner-border text-primary my-2 mb-3" id = "spinner" style = "display: none;">
                         <span id = "spinnerText" style = "display: none;"></span>
                     </div>
+                    <div class="buttonadd rounded-circle">
+                        
+                        <button class="btn" id="btnAddProduct"><i class="fa-solid fa-plus fa-2xl"></i></button>
+                    </div>
+                    <div class="contAgregarProducto" style="display: none;">
+                        <form class="FormularioAgregarProducto gap-2" id="FormAgregarProducto" style="display: none;">
+                            <center>
+                                <h2>Registrar Producto</h2>
+                            </center>
+                            <label for="Nombre">Nombre:<input type="text" name="NombreProducto" class="form-control"></label>
+                            <label for="Descripcion">Descripcion:<input type="text" name="DesProducto" class="form-control"></label>
+                            <label for="Precio">Precio:<input type="text" name="PrecioProducto" class="form-control"></label>
+                            <label for="Existencias">Existencias:<input type="text" name="existencias" class="form-control"></label>
+                            <label for="expiracion">Fecha de Expiracion: <input type="date" name="Expiracion" class="form-control"></label>
+                            <label for="Solucion">Solucion: <input type="text" name="solucion" class="form-control"></label>
+                            <button class="btn btn-success">agregar</button>
+                        </form>
+                    </div>
                 </div>
                 <div id="shoppingCart" class="section" style = "display: none;">
                     <div class = "cartList d-flex flex-column align-items-center gap-5" id = "cartList">
@@ -163,7 +181,7 @@
             </div>
         </div>
     </main>
-    <div class="overlay" style="display: none;" id = "overlay">
+    <div class="overlay" style="display: none;"  id = "overlay">
         <div class="account" id = "windowAccount" style = "display: none;">
             <div class="header mb-3"><h3><%= userName %></h3><input type="button" id="closeWindow" class="btn-close"></div>
             <div class = "controls">
