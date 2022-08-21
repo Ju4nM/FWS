@@ -15,6 +15,7 @@
 <body>
     <main>
         <input type="text" id = "userType" hidden value = "<%= userType %>">
+        <input type="text" id="hasJob" hidden value = "<%= hasJob %>">
         <div class = "titleBar">
             <button class = "btn" id = "hamburgerMenu" type = "button"> 
                 <i class="fa-solid fa-bars fa-2xl"></i>
@@ -70,6 +71,30 @@
                     </div>
                     <div class="spinner-border text-primary my-2 mb-3" id = "spinner" style = "display: none;">
                         <span id = "spinnerText" style = "display: none;"></span>
+                    </div>
+                    <button class="buttonadd rounded-circle" id = "btnAddProduct">
+                        <i class="fa-solid fa-plus fa-2xl"></i>
+                    </button>
+                    <div class="contAgregarProducto" style="display: none;">
+                        <form class="FormularioAgregarProducto gap-2 p-4" id="FormAgregarProducto" style="display: none;">
+                            <div class = "header">
+                                <h2>Registrar Producto</h2>
+                                <button type = "button" class = "btn btn-close"></button>
+                            </div>
+                            <label>Nombre:<input type="text" name="productName" class="form-control" placeholder="Nombre de medicamento"></label>
+                            <label>
+                                Descripcion:
+                                <textarea name="description" class = "form-control" rows="2" placeholder="Descripcion del medicamento"></textarea>
+                            </label>
+                            <label>
+                                Solucion: 
+                                <textArea name = "solutions" class = "form-control" rows = "3" placeholder="Soluciones del medicamento"></textArea>
+                            </label>
+                            <label>Precio unitario:<input type="number" min = "0" step = "0.50" name="unitPrice" class="form-control" placeholder="Precio"></label>
+                            <label>Existencias:<input type="number" name="stock" class="form-control" placeholder="Existencias"></label>
+                            <label>Fecha de Expiracion: <input type="date" name="expirationDate" class="form-control" placeholder="Expiracion"></label>
+                            <button type = "submit" class="btn btn-success mt-3">Agregar</button>
+                        </form>
                     </div>
                 </div>
                 <div id="shoppingCart" class="section" style = "display: none;">
@@ -130,11 +155,11 @@
     
                         </div>
                         <div class = "d-flex justify-content-between mt-3" style = "justify-content: space-between;">
-                            <span id = "total" class = "text-success fw-bold">$ 1000000</span>
                             <div class="cartControls">
                                 <button class="btn btn-success">Realizar compra</button>
                                 <button class="btn btn-danger">Vaciar carrito</button>
                             </div>
+                            <span id = "total" class = "text-success fw-bold">$ 1000000</span>
                         </div>
                     </div>
                 </div>
@@ -169,7 +194,7 @@
             </div>
         </div>
     </main>
-    <div class="overlay" style="display: none;" id = "overlay">
+    <div class="overlay" style="display: none;"  id = "overlay">
         <div class="account" id = "windowAccount" style = "display: none;">
             <div class="header mb-3"><h3><%= userName %></h3><input type="button" id="closeWindow" class="btn-close"></div>
             <div class = "controls">

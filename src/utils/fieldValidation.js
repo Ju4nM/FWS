@@ -17,11 +17,6 @@ export default class Validation {
     }
 
     valNames(name, campo) {
-        // if (name == "") {
-        //     this.errors.push("El " + campo + " no puede estar vacio");
-        // } else if (/[0-9]|\s+$/g.test(name)) {
-        //     this.errors.push("El " + campo + " no puede estar vacio y solo se permiten letras");
-        // }
         if (name == "") {
             this.errors.push("El " + campo + " no puede estar vacio");
         } else if (!/^[a-zA-Z\u00E0-\u00FC\s]+$/g.test(name)) {
@@ -75,5 +70,54 @@ export default class Validation {
         await this.valUserName(userName);
         this.valPassword(password);
         await this.valEmail(email);
+    }
+
+    // product fields
+    productName (name) {
+        if (name.length === 0) {
+            this.errors.push("El nombre del producto esta vacio");
+        } else if (!/\w/.test(name)) {
+            this.errors.push("Solo carateres alfanumericos en el nombre");
+        }
+    }
+
+    productDescription (description) {
+        if (description.length === 0) {
+            this.errors.push("La descripcion esta vacia");
+        } else if (!/\w/.test(description)) {
+            this.errors.push("Solo caracteres alfanumericos en la descripcion");
+        }
+    }
+
+    productSolutions (solutions) {
+        if (solutions.length === 0) {
+            this.errors.push("La solucion esta vacia");
+        } else if (!/\w/.test(solutions)) {
+            this.errors.push("Solo caracteres alfanumericos en las soluciones");
+        }
+    } 
+
+    expirationDate (date) {
+        if (!/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/.test(date)) {
+            this.errors.push("La fecha debe tener el formato dd/mm/yyyy");
+        }
+    }
+
+    productStockAndPrice (value, customError) {
+        if (!/^[0-9]+$/.test(value)) {
+            this.errors.push(customError);
+        }
+    }
+
+    validateAllProductFields(productData) {
+        let { productName, description, solutions, expirationDate, stock, unitPrice } = productData;
+        this.productName(productName);
+        this.productDescription(description);
+        this.productSolutions(solutions);
+        this.productStockAndPrice(stock, "El valor de las existencias no es correcto");
+        this.productStockAndPrice(unitPrice, "El valor del precio no es correcto");
+        expirationDate = expirationDate.split(/-|\//).reverse().join("-");
+        console.log(expirationDate);
+        this.expirationDate(expirationDate);
     }
 }

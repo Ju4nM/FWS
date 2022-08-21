@@ -6,21 +6,27 @@ import ProductFinder from "./productFinder.js";
 import ShoppingCart from "./shoppingCart.js";
 import Spinner from "./spinner.js";
 import Product from "./product.js";
+import ModalForm from "./modalForm.js";
+import FormAddProduct from "./formAddProduct.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     
     const userType = document.getElementById("userType").value;
-    
+    const modalForm = new ModalForm("FormAgregarProducto");
+
     const shoppingCart = new ShoppingCart("cartList");
-    const product = new Product(shoppingCart);
+    const product = new Product(shoppingCart, userType);
     let sectionProducts = document.getElementById("products");
     let sectionCart = document.getElementById("shoppingCart");
+    let btnAddProduct = document.getElementById("btnAddProduct");
     let spinner = new Spinner("spinner", "spinnerText");
 
     let listProducts = new ListProducts("listProducts", sectionProducts, spinner, product, shoppingCart);
     new ProductFinder("toSearch", "searchCriteria", "btnFinder", sectionProducts, listProducts, spinner, product, shoppingCart);
+    new FormAddProduct("FormAgregarProducto", listProducts, modalForm);
     let currentActive;
-    
+
+    btnAddProduct.addEventListener("click",()=> modalForm.show());
     const title = document.getElementById("title");
     const windowAccount = document.getElementById("windowAccount");
     const closeWindowAccount = document.getElementById("closeWindow");
@@ -51,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         new ListEmployees ("employeeTable");
+    } else if (userType === "employee") {
+        let { value } = document.getElementById("hasJob");
+        value = value === "true";
+        if (!value) btnAddProduct.style.display = "none";
     }
     
     function btnAccountHandler () {

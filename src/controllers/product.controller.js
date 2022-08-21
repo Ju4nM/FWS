@@ -8,8 +8,6 @@ class Product {
     async getProducts (ownerId, limit = 0, rowCount = 0, biggerThan = true) {
         
         let isBiggerThan = biggerThan == "true" || biggerThan == true ? 1 : 0
-        // console.log("Valor de bigger than: " + isBiggerThan);
-        // console.log("limit " + limit);
         let products = await this.pool.request()
             .input("op", 5)
             .input("ownerId", ownerId)
@@ -27,8 +25,6 @@ class Product {
     async searchProduct (ownerId, valueToSearch, criteria, lastId, rowCount, biggerThan) {
 
         const products = await this.getProducts(ownerId, lastId, 0, biggerThan);
-        // console.log("Productos:");
-        // console.log(products);
         let foundProducts = [];
 
         for (let i = 0; i < products.length; i++) {
@@ -59,7 +55,50 @@ class Product {
         }
         
         return false;
+    
+    }
+
+    async delete(ownerId, productId) {
+        let result = await this.pool.request()
+        .input("op", 4)
+        .input("ownerId", ownerId)
+        .input("productId", productId)
+        .execute("sp_product");
+        return result.rowsAffected [0] === 1;
+    }
+
+    async add (productData) {
+        let { ownerId, productName, description, solutions, unitPrice, stock, expirationDate } = productData;
+        let employeeId = null;
+        if (productData.employeeId) employeeId = productData.employeeId;
+
+        let result = await this.pool.request()
+            .input("op", 1)
+            .input("productName", productName)
+            .input("description", description)
+            .input("solutions", solutions)
+            .input("unitPrice", unitPrice)
+            .input("stock", stock)
+            .input("expirationDate", expirationDate)
+            .input("ownerId", ownerId)
+            .input("employeeId", employeeId)
+            .execute("sp_product");
+
+        return result.recordset;
+    }
+
+    async getProductData (productId, ownerId) {
+        let result = await this.pool.request()
+            .input("op", 2)
+            .input("productId", parseInt(productId))
+            .input("ownerId", ownerId)
+            .execute("sp_product");
+        
+        
+        return result.recordset;
     }
 }
+
+
 
 export default new Product(await getConnection());

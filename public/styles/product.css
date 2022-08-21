@@ -1,0 +1,18 @@
+body::-webkit-scrollbar {
+    appearance: none;
+    width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #0f0f0f;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    background-color: #0f0f0f;
+}

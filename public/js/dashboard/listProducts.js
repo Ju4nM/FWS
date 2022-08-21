@@ -83,4 +83,9 @@ export default class ListProducts {
         this.spinner.hide();
         this.isRendered = true;
     }
+
+    addProduct (productData) {
+        let card = this.product.createCard(productData);
+        this.listProducts.insertBefore(card, this.listProducts.firstElementChild);
+    }
 }

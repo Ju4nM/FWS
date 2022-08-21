@@ -252,6 +252,70 @@ main {
     width: max-content;
 }
 
+.buttonadd{
+    background-color: #0b4f7c;
+    width: 100px;
+    height: 100px;
+    display: grid;
+    place-items: center;
+    color: white;
+    position:fixed;
+    /* bottom: 100px;
+    right: 200px; */
+    bottom: 10%;
+    right: 10%;
+    font-size: 30px;
+    z-index: 3;
+    box-shadow: 4px 3px 10px black;
+    border: none;
+    opacity: 40%;
+    transition: .4s;
+}
+
+.buttonadd:hover {
+    opacity: 100%;
+}
+
+.FormularioAgregarProducto{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 90%;
+    background-color: white;
+    /* padding: 10px; */
+    border-radius: 5px;
+    width: 50%;
+    box-shadow: 4px 3px 10px black;
+    animation: showMsg .5s;
+}
+
+.FormularioAgregarProducto::-webkit-scrollbar {
+    appearance: none;
+    width: 7px;
+}
+
+.FormularioAgregarProducto::-webkit-scrollbar-thumb {
+    background-color: #000;
+}
+
+.FormularioAgregarProducto textarea {
+    resize: none;
+}
+
+.contAgregarProducto{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: grid;
+    place-items: center;
+    z-index: 1022;
+    animation: showOverlay .9s;
+}
+
 @keyframes sideBar {
     0% {
         transform: translateX(-70px);

@@ -1,9 +1,11 @@
 import ButtonAdd from "./addProduct.js";
+import ButtonDelete from "./buttonDelete.js";
 
 export default class Product {
 
-    constructor (shoppingCart) {
+    constructor (shoppingCart, userType) {
         this.shoppingCart = shoppingCart;
+        this.userType = userType;
         this.products = {};
     }
 
@@ -23,7 +25,7 @@ export default class Product {
         const link = document.createElement("a");
         link.setAttribute("href", `/dashboard/product/${productId}`);
         link.setAttribute("class", "productLink");
-        link.setAttribute("target", "_blank");
+        // link.setAttribute("target", "_blank");
         link.textContent = productName;
         
         const tagTitle = document.createElement("h3"); // Title
@@ -67,6 +69,10 @@ export default class Product {
         div = document.createElement("div");
         div.setAttribute("class", "d-flex justify-content-end gap-2");
         // div.innerHTML = '<button class="btn btn-primary">Agregar</button><button class="btn btn-danger">Borrar</button>'
+        if (this.userType === "boss") {
+            const buttonDelete = new ButtonDelete(productId, card);
+            div.appendChild(buttonDelete.createButton());
+        }
         const buttonAdd = new ButtonAdd(this.shoppingCart, productData);
         this.shoppingCart.addCardButton(productId, buttonAdd);
         div.appendChild(buttonAdd.createButton());

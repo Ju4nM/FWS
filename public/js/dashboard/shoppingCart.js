@@ -8,14 +8,13 @@ export default class ShoppingCart {
     }
 
     addProduct (productData) {
-        let { productId} = productData;
+        let { productId } = productData;
         
         if (this.addedProducts[productId]) {
             this.addOne(productId);
         } else {
             let product = this.createElement(productData);
             this.addedProducts[productId] = product;
-            console.log(this.addedProducts);
         }
     }
 
@@ -53,6 +52,7 @@ export default class ShoppingCart {
         const controls = document.createElement("div");
         controls.setAttribute("class", "cardControls");
         controls.appendChild(this.createControls(productId));
+        data.buttonAdd = controls.firstElementChild;
         cartCard.appendChild(controls);
         data.stockTag = cartCard.firstElementChild.lastElementChild.previousElementSibling.lastElementChild;
         data.priceTag = cartCard.firstElementChild.lastElementChild.lastElementChild;
@@ -82,7 +82,7 @@ export default class ShoppingCart {
         buttonAdd.textContent = "+1";
 
         // Event listeners
-        buttonAdd.addEventListener("click", () => this.addOne(buttonAdd, productId, true));
+        buttonAdd.addEventListener("click", () => this.addOne(productId, true));
         buttonRemove.addEventListener("click", () => this.removeOne(buttonAdd, productId));
         buttonDelete.addEventListener("click", () => this.deleteProduct(productId));
 
@@ -93,10 +93,13 @@ export default class ShoppingCart {
         return controls;
     }
 
-    addOne (buttonAdd, productId, fromCart = false) {
+    addOne (productId, fromCart = false) {
         this.addedProducts[productId].stock++;
-        if (this.addedProducts[productId].stock === this.addedProducts[productId].stockLimit) buttonAdd.setAttribute("disabled", "true");
-        if (fromCart) this.buttons[productId].addOne();
+        if (this.addedProducts[productId].stock === this.addedProducts[productId].stockLimit) // this.addedProducts[productId].buttonAdd.setAttribute("disabled", "true");
+        console.log(fromCart);
+        if (fromCart) {
+            this.buttons[productId].addOne();
+        }
         this.addedProducts[productId].stockTag.textContent = this.addedProducts[productId].stock;
         let currentPrice = this.addedProducts[productId].stock * this.addedProducts[productId].unitPrice;
         this.addedProducts[productId].priceTag.textContent = `$${currentPrice}`;
