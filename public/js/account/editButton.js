@@ -1,9 +1,9 @@
 export default class EditButton {
 
-    constructor (idButton, typeFields, fnForEvent) {
+    constructor (idButton, selector, fnForEvent) {
         this.editButton = document.getElementById(idButton);
         this.dataCard = this.editButton.parentElement.parentElement;
-        this.fields = Array.from(this.dataCard.querySelectorAll(`input[type=${typeFields}]`));
+        this.fields = Array.from(this.dataCard.querySelectorAll(selector));
         this.fnForEvent = fnForEvent;
         this.isEditing = false;
         

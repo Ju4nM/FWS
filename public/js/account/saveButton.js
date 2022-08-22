@@ -28,10 +28,10 @@ export default class SaveButton {
             e.preventDefault();
         })
 
-        const editUserInf = new EditButton ("editUserInf", "text", () => this.toggle()); // section with name, lastname, secondlastname
-        const editSessionInf = new EditButton ("editSessionInf", "text", () => this.toggle()); // section with user name and password (only manage user name)
-        const editContactInf = new EditButton ("editContactInf", "text", () => this.toggle()); // section with email
-        const editPassword = new EditButton ("editPassword", "password", (dataCard, isEditing) => { // section with two password fields (password and confirm password)
+        const editUserInf = new EditButton ("editUserInf", "input[type=text]", () => this.toggle()); // section with name, lastname, secondlastname
+        const editSessionInf = new EditButton ("editSessionInf", "input[type=text]", () => this.toggle()); // section with user name and password (only manage user name)
+        const editContactInf = new EditButton ("editContactInf", "input[type=text]", () => this.toggle()); // section with email
+        const editPassword = new EditButton ("editPassword", "input[type=password]", (dataCard, isEditing) => { // section with two password fields (password and confirm password)
 
             let passwFields = Array.from(dataCard.querySelectorAll("input[type=password]"));
 
@@ -89,7 +89,6 @@ export default class SaveButton {
             .then (res => {
                 
                 if (res.status) {
-                    console.log(res.data);
                     this.message.show(res.msg);
                     this.#loadNewData(res.data);
                 } else {

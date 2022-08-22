@@ -43,10 +43,15 @@ nav {
     width: max-content;
 }
 
-.passwordSection > div > span {
+.passwordSection > div label {
     height: 38px;
     vertical-align: middle;
     line-height: 38px;
+}
+
+.cardContent textarea {
+    resize: none;
+    width: max-content;
 }
 
 .footer {

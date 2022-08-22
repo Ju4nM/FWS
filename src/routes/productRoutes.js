@@ -92,7 +92,7 @@ router.post("/product/add", async (req, res) => {
         let validation = new Validation(userType);
         let productData = {};
         for (const key in req.body) productData[key] = req.body[key].trimEnd();
-        console.log(productData);
+        
         let response = {status: false, msg: "Ha habido un error"};
         validation.validateAllProductFields(productData);
 
@@ -151,9 +151,9 @@ router.get("/product/:id", async (req, res) => {
         if (ownerId !== null) {
             
             let productData = await Product.getProductData(id, ownerId);
-            console.log(productData);
+            
             if (productData.length === 1) {
-                res.render("product", productData[0]);
+                res.render("product", { productId: id, ...productData[0] });
             } else {
                 res.sendStatus(404);
             }
@@ -162,6 +162,82 @@ router.get("/product/:id", async (req, res) => {
         }
     } else {
         res.sendStatus(404);
+    }
+});
+
+router.post("/product/edit", async (req, res) => {
+    const cookieAuth = new CookieAuth(req.cookies);
+    const cookieIsExist = await cookieAuth.auth();
+
+    if (cookieIsExist) {
+        let cookieData = cookieAuth.getData();
+        let { userType, userId } = cookieData;
+        let data = {};
+        for (const key in req.body) data[key] = req.body[key].trimEnd();
+
+        let validation = new Validation(userType);
+        let ownerId = null;
+
+        if (userType === "boss") {
+            ownerId = userId;
+        } else if (userType === "employee") {
+            let [ employeeData ] = await Employee.getEmployeeData(userId);
+            
+            if (employeeData.bossId !== null) {
+                ownerId = employeeData.bossId;
+            } else {
+                res.sendStatus(404);
+                return;
+            }
+        }
+        
+        let [ productData ] = await Product.getProductData(data.productId, ownerId);
+        console.log(productData);
+
+        if (data.hasOwnProperty("productName")) {
+            validation.productName(data.productName);
+            productData.productName = data.productName;
+        }
+
+        if (data.hasOwnProperty("description")) {
+            validation.productDescription(data.description);
+            productData.description = data.description;
+        }
+
+        if (data.hasOwnProperty("solutions")) {
+            validation.productSolutions(data.solutions);
+            productData.solutions = data.solutions;
+        }
+
+        if (data.hasOwnProperty("unitPrice")) {
+            validation.productStockAndPrice(data.unitPrice, "El valor del precio no es correcto");
+            productData.unitPrice = data.unitPrice;
+        }
+
+        if (data.hasOwnProperty("stock")) {
+            validation.productStockAndPrice(data.stock, "El valor de las existencias no es correcto");
+            productData.stock = data.stock;
+        }
+
+        if (data.hasOwnProperty("expirationDate")) {
+            let { expirationDate } = data;
+            expirationDate = expirationDate.split(/-|\//).reverse().join("-");
+            validation.expirationDate(expirationDate);
+            productData.expirationDate = expirationDate;
+        }
+
+        if (validation.isValid()) {
+            let result = await Product.updateProductData({ownerId, productId: data.productId, ...productData });
+            if (result) {
+                productData.expirationDate = productData.expirationDate.split("-").reverse().join("-");
+                res.json({ status: true, msg: "Se ha actualizado correctamente", productData });
+            } else {
+                res.json({ status: false, msg: [ "Ha ocurrido un error" ] });
+            }
+        } else {
+            let errors = validation.getErrors();
+            res.json({status: false, errors});
+        }
     }
 });
 

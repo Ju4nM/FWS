@@ -97,6 +97,23 @@ class Product {
         
         return result.recordset;
     }
+
+    async updateProductData (productData) {
+        let { ownerId, productName, description, solutions, stock, unitPrice, productId, expirationDate } = productData
+        let result = await this.pool.request()
+            .input("op", 3)
+            .input("ownerId", ownerId)
+            .input("productId", productId)
+            .input("productName", productName)
+            .input("description", description)
+            .input("solutions", solutions)
+            .input("unitPrice", unitPrice)
+            .input("expirationDate", expirationDate.split("-").reverse().join("-"))
+            .input("stock", stock)
+            .execute("sp_product");
+
+        return result.rowsAffected[0] === 1; 
+    }
 }
 
 

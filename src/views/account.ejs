@@ -23,13 +23,13 @@
                     </div>
                     <div class = "cardContent">
                         <div>
-                            <span class = "fw-bold">Nombre(s):</span><input type="text" name = "name" disabled="" class = "form-control" value = "<%= name %>" placeholder="Nombre(s)">
+                            <label for = "name" class = "fw-bold">Nombre(s):</label><input type="text" id = "name" name = "name" disabled="" class = "form-control" value = "<%= name %>" placeholder="Nombre(s)">
                         </div>
                         <div>
-                            <span class = "fw-bold text-nowrap">Apellido paterno:</span><input type="text" name = "lastName" disabled="" class = "form-control" value = "<%= lastName %>" placeholder="Apellido paterno">
+                            <label for = "lastName" class = "fw-bold text-nowrap">Apellido paterno:</label><input id = "lastName" type="text" name = "lastName" disabled="" class = "form-control" value = "<%= lastName %>" placeholder="Apellido paterno">
                         </div>
                         <div>
-                            <span class = "fw-bold text-nowrap">Apellido materno:</span><input type="text" name = "secondLastName" disabled="" class = "form-control" value = "<%= secondLastName %>" placeholder="Apellido materno">
+                            <label for = "secondLastName" class = "fw-bold text-nowrap">Apellido materno:</label><input type="text" id = "secondLastName" name = "secondLastName" disabled="" class = "form-control" value = "<%= secondLastName %>" placeholder="Apellido materno">
                         </div>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
                     </div>
                     <div class = "cardContent">
                         <div>
-                            <span class = "fw-bold">Usuario:</span><input type="text" name = "userName" disabled="" class = "form-control" value = "<%= userName %>" placeholder="Nombre de usuario"> 
+                            <label for = "userName" class = "fw-bold">Usuario:</label><input type="text" id = "userName" name = "userName" disabled="" class = "form-control" value = "<%= userName %>" placeholder="Nombre de usuario"> 
                         </div>
                         <div class="d-flex align-items-start passwordSection">
                             <div>
-                                <span class = "fw-bold text-nowrap">Contrase&ntilde;a:</span>
+                                <label for = "password" class = "fw-bold text-nowrap">Contrase&ntilde;a:</label>
                             </div>
                             <div class = "d-flex flex-column">
-                                <input type="password" name = "password" class = "form-control" value = "********" disabled="" placeholder="Contrase&ntilde;a">
+                                <input type="password" id = "password" name = "password" class = "form-control" value = "********" disabled="" placeholder="Contrase&ntilde;a">
                                 <input type="password" name = "repeatedPassword" class = "form-control" disabled="" placeholder="Repita contrase&ntilde;a" style = "display: none;">
                             </div>
                             <button class="btn btn-warning" id = "editPassword" type = "button"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -63,7 +63,7 @@
                     </div>
                     <div class = "cardContent">
                         <div>
-                            <span class = "fw-bold text-nowrap">Correo:</span><input type="text" name = "email" class = "form-control" value = "<%= email %>" disabled="" placeholder="Correo">
+                            <label for = "email" class = "fw-bold text-nowrap">Correo:</label><input type="text" id = "email" name = "email" class = "form-control" value = "<%= email %>" disabled="" placeholder="Correo">
                         </div>
                     </div>
                 </div>

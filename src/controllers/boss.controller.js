@@ -102,8 +102,8 @@ class Boss {
 
     async updateData (data) {
         
-        let { userId, name, lastName, secondLastName, userName, password, email } = data;
-        password = await Cipher.hash(password);
+        let { userId, name, lastName, secondLastName, userName, password, email, passwordChanged } = data;
+        if (passwordChanged) password = await Cipher.hash(password);
         let result = await this.pool.request()
             .input("name", name)
             .input("lastName", lastName)

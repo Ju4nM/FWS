@@ -7,8 +7,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/5128f6ea7d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/styles/overlay.css">
-        <link rel="stylesheet" href="/styles/product.css">
-        <!-- <script src="/js/account/account.js" type = "module"></script> -->
+        <link rel="stylesheet" href="/styles/account.css">
+        <script src="/js/product/product.js" type = "module"></script>
         <link rel="icon" href="/img/favicon.svg">
         <title>FWS - <%= productName %></title>
     </head>
@@ -16,21 +16,76 @@
         <nav class="py-2 px-3 d-flex gap-3 justify-content-between sticky-top"><a href = "/dashboard" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i> Volver</a><a href = "/logout" class = "btn btn-outline-danger">Cerrar sesion</a></nav>
         <main>
             <form id = "productForm">
-                <input type="text" name="productName" placeholder="Nombre del producto">
+                <input type="hidden" name="productId" id = "productId" value = "<%= productId %>">
+                <div class="dataCard">
+                    <div class="header pb-3">
+                        <h3 class = "fw-bold">Datos generales</h3>
+                        <button type = "button" id = "generalData" class = "btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class="cardContent">
+                        <div>
+                            <label for = "productName" class = "fw-bold text-nowrap">Nombre producto: </label>
+                            <input type="text" id = "productName" class = "form-control" name="productName" placeholder="Nombre de producto" value = "<%= productName %>" disabled = "">
+                        </div>
+                        <div class = "flex-column align-items-start">
+                            <label for="description" class = "fw-bold">Descripcion: </label>
+                            <textarea placeholder = "Descripcion" class = "form-control" name="description" id="description" rows="2" disabled = ""><%= description %></textarea>
+                        </div>
+                        <div class = "flex-column align-items-start">
+                            <label for="solutions" class = "fw-bold">Soluciones: </label>
+                            <textarea placeholder = "Soluciones" name="solutions" id="solutions" rows="2" class = "form-control" disabled = ""><%= solutions %></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dataCard">
+                    <div class="header pb-3">
+                        <h3 class = "fw-bold">Datos variables</h3>
+                        <button type = "button" id = "variableData" class = "btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class="cardContent">
+                        <div>
+                            <label for = "unitPrice" class = "fw-bold text-nowrap">Precio unitario ($): </label> 
+                            <input type="number" step = "0.5" id = "unitPrice" class = "form-control" name="unitPrice" placeholder="Precio unitario" value = "<%= unitPrice %>" disabled = "">
+                        </div>
+                        <div>
+                            <label for="stock" class = "fw-bold">Existencias: </label>
+                            <input type="number" name="stock" id="stock" value = "<%= stock %>" disabled = "" class = "form-control">
+                        </div>
+                        <div>
+                            <label for="expirationDate" class = "fw-bold">Expiracion: </label>
+                            <input type="date" name="expirationDate" id="expirationDate" value = "<%= expirationDate.split("-").reverse().join("-") %>" class = "form-control" disabled = "">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dataCard">
+                    <div class="header pb-3">
+                        <h3 class = "fw-bold">Datos inmutables</h3>
+                    </div>
+                    <div class="cardContent">
+                        <div class = "flex-column align-items-start">
+                            <span class = "fw-bold text-nowrap text-primary">Fecha de registro: </span><span class = "fw-bold"><%= creationDate %></span>
+                        </div>
+                        <div class = "flex-column align-items-start">
+                            <span class = "fw-bold text-nowrap text-primary">Nombre del dueño: </span><span class = "fw-bold"><%= bossName %></span>
+                        </div>
+                        <% if (employeeName !== null) { %>
+                            <div class = "flex-column align-items-start">
+                                <span class = "fw-bold text-primary text-nowrap">Empleado que registro: </span> <span class = "fw-bold"><%= employeeName %></span>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="d-flex py-3 justify-content-end">
+                    <button type = "submit" id = "btnSave" disabled = "" class = "btn btn-success">Guardar</button>
+                </div>
             </form>
         </main>
         <div class="overlay" style = "display: none;">
             <div id = "message" class="msg" style = "display: none;"> 
                 <div class="header mb-3"><span>Alerta </span><input type="button" id="closeMsg" class="btn-close"></div>
                 <p></p>
-            </div>
-            <div class="msg" id = "modalInput" style="display: none;">
-                <form>
-                    <div class="header mb-3"><span class = "fw-bold">Confirmaci&oacute;n: </span><input type="button" id="closeModal" class="btn-close" /></div>
-                    <p class = "fw-bold">Escriba su contrase&ntilde;a actual para confirmar los cambios:</p>
-                    <input type="password" id = "modalField" class = "form-control" placeholder="Contrase&ntilde;a">
-                    <div class="d-flex justify-content-end mt-3"><button type = "input" id = "modalButton" class="btn btn-success">Confirmar</button></div>
-                </form>
             </div>
         </div>
     </body>

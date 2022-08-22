@@ -16,3 +16,18 @@ main {
 nav {
     background-color: #0f0f0f;
 }
+
+.dataGroup .data {
+    width: max-content;
+}
+
+.data label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+}
+
+label input {
+    width: max-content;
+}

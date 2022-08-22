@@ -57,7 +57,8 @@ export default async function updateData (req, res) {
         }
         userData.userName = data.userName;
     }
-
+    
+    userData.passwordChanged = false;
     if (data.hasOwnProperty("password")) {
         if (data.password === userData.password) {
             errors.push("La contraseña es la misma");
@@ -68,8 +69,9 @@ export default async function updateData (req, res) {
             validation.valPassword(data.password);
         }
         userData.password = data.password;
-        console.log(data.password);
-        console.log(userData);
+        userData.passwordChanged = true;
+        // console.log(data.password);
+        // console.log(userData);
     }
     
     errors = errors.concat(validation.getErrors());

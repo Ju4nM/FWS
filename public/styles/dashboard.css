@@ -381,6 +381,10 @@ main {
 
 @media (max-width: 715px) {
 
+    .FormularioAgregarProducto {
+        width: 96%;
+    }
+
     .dataCard {
         grid-template-columns: repeat(2, 1fr);
     }

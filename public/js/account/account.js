@@ -1,4 +1,3 @@
-import EditButton from "./editButton.js";
 import SaveButton from "./saveButton.js";
 
 document.addEventListener("DOMContentLoaded", () => {
