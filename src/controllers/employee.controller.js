@@ -141,6 +141,19 @@ class Employee {
         console.log(isUncoupled);
         return isUncoupled.rowsAffected[1] === 1;
     }
+
+    async addEmployee (employeeId, bossId) {
+        
+        let employeeData = await this.getEmployeeData(employeeId);
+        
+        if (employeeData[0].bossId != null) return [];
+        const added = await this.pool.request()
+            .input("bossId", bossId)
+            .input("employeeId", employeeId)
+            .execute("sp_addEmployee")
+
+        return added.recordset;
+    }
 }
 
 

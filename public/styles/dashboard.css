@@ -316,6 +316,14 @@ main {
     animation: showOverlay .9s;
 }
 
+.formAddEmployee {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    
+}
+
 @keyframes sideBar {
     0% {
         transform: translateX(-70px);

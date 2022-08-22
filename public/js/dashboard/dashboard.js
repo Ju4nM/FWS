@@ -8,6 +8,7 @@ import Spinner from "./spinner.js";
 import Product from "./product.js";
 import ModalForm from "./modalForm.js";
 import FormAddProduct from "./formAddProduct.js";
+import AddEmployee from "./addEmployee.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -56,7 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
             currentActive = btnEmployees;
         });
 
-        new ListEmployees ("employeeTable");
+        let listEmployees = new ListEmployees ("employeeTable");
+        
+        new AddEmployee("formAddEmployee", "employeeTable", listEmployees);
+
     } else if (userType === "employee") {
         let { value } = document.getElementById("hasJob");
         value = value === "true";
