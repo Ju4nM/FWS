@@ -145,14 +145,23 @@ class Employee {
     async addEmployee (employeeId, bossId) {
         
         let employeeData = await this.getEmployeeData(employeeId);
-        
         if (employeeData[0].bossId != null) return [];
+
         const added = await this.pool.request()
             .input("bossId", bossId)
             .input("employeeId", employeeId)
             .execute("sp_addEmployee")
 
         return added.recordset;
+    }
+
+    async leaveJob (employeeId, bossId) {
+        let result = await this.pool.request()
+            .input("bossId", bossId)
+            .input("employeeId", employeeId)
+            .execute("sp_uncoupleEmployee");
+        
+        return result.rowsAffected[1] === 1;
     }
 }
 

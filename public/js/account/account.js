@@ -1,3 +1,4 @@
+import LeaveJob from "./leaveJob.js";
 import SaveButton from "./saveButton.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,5 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!hasJob && !isBoss) {
         const employeeId = parseInt(document.getElementById("employeeId").value);
         document.getElementById("copyId").onclick = () => navigator.clipboard.writeText(employeeId).then(() => console.log("Id copied"));
+    }
+
+    if (hasJob && !isBoss) {
+        new LeaveJob("leaveJob");
     }
 });

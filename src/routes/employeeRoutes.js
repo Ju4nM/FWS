@@ -90,7 +90,14 @@ router.post("/leaveJob", async (req, res) => {
             let [ employeeData ] = await Employee.getEmployeeData(userId);
             if (employeeData.bossId !== null) {
                 let result = await Employee.leaveJob(userId, employeeData.bossId);
-                
+
+                if (result) {
+                    res.json({ status: result, msg: "Se ha dejado el empleo" })
+                } else {
+
+                    res.json({ status: result, msg: "No se pudo dejar el empleo" })
+                }
+                // ------------------------------ Here
             }
         } else {
             res.sendStatus(404);

@@ -85,10 +85,22 @@
                         </div>
                     <% } else { %>
 
+                        <div class="dataCard" id = "idDisplayed" style = "display: none;">
+                            <div class="header pb-3 text-start">
+                                <h3 class="fw-bold">ID de empleado</h3>
+                                <button class="btn btn-outline-success" type = "button" id = "copyId"><i class="fa-regular fa-clipboard"></i></button>
+                            </div>
+                            <div class="cardContent">
+                                <div>
+                                    <span class = "fw-bold text-nowrap">ID: </span> <span class = "overflow-auto"><%= userId %></span>
+                                    <input type="text" id="employeeId" disabled="" style = "display: none;" value = "<%= userId %>">
+                                </div>
+                            </div>
+                        </div>
                         <div class="dataCard">
                             <div class = "header pb-3 text-start">
                                 <h3 class = "fw-bold">Dejar empleo</h3>
-                                <button class = "btn btn-outline-danger">Dejar</button>
+                                <button class = "btn btn-outline-danger" id = "leaveJob" type = "button">Dejar</button>
                             </div>
                         </div>
 

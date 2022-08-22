@@ -61,6 +61,10 @@ export default class AddEmployee {
         tr.appendChild(td);
 
         this.table.querySelector("tbody").appendChild(tr);
+        if (this.table.style.display !== "") {
+            this.table.nextElementSibling.style.display = "none";
+        }
+        this.table.style.display = "";
         this.form.reset();
     }
 }
