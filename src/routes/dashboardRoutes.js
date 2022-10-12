@@ -5,11 +5,13 @@ import Boss from '../controllers/boss.controller.js';
 import Employee from '../controllers/employee.controller.js';
 import productRoutes from "./productRoutes.js";
 import employeeRoutes from "./employeeRoutes.js";
+import cartRoutes from "./cartRoutes.js";
 
 const router = express.Router();
 
 router.use("/dashboard", productRoutes);
 router.use("/dashboard", employeeRoutes);
+router.use("/dashboard/shopping/", cartRoutes);
 
 router.get("/dashboard/account", async (req, res) => {
 

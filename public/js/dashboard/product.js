@@ -74,7 +74,7 @@ export default class Product {
             div.appendChild(buttonDelete.createButton());
         }
         const buttonAdd = new ButtonAdd(this.shoppingCart, productData);
-        this.shoppingCart.addCardButton(productId, buttonAdd);
+        this.shoppingCart.addCardButton(productId, buttonAdd); // Save all add buttons in shoppingCart Object
         div.appendChild(buttonAdd.createButton());
         card.appendChild(div);
         

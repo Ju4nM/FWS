@@ -98,69 +98,16 @@
                     </div>
                 </div>
                 <div id="shoppingCart" class="section" style = "display: none;">
-                    <div class = "cart">
-                        <div class = "cartList d-flex flex-column justify-self-center align-items-center gap-5" id = "cartList">
-    
-                            <!-- <div class = "cartCard">
-                                <div class="dataCard">
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-primary fw-bold">Producto</h5>
-                                        <span>Paracetamol</span>
-                                    </div>
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-dark fw-bold">Descripcion</h5>
-                                        <span>500mg</span>
-                                    </div>
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-warning fw-bold">Cantidad</h5>
-                                        <span>12</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-end">
-                                        <h5 class = "text-success fw-bold">Precio</h5>
-                                        <span>$1000</span>
-                                    </div>
-                                </div>
-                                <div class = "cardControls">
-                                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                    <button class="btn btn-warning">-1</button>
-                                    <button class="btn btn-success">+1</button>
-                                </div>
+                    <h3 id = "cartMessage">No hay productos en el carrito</h3>
+                    <div class = "cart" style = "display: none;">
+                        <div class = "cartList d-flex flex-column justify-self-center align-items-center gap-5" id = "cartList"></div>
+                        <div class = "my-3 d-flex flex-column">
+                            <span id = "totalPrice" class = "fs-3 text-success fw-bold text-end">$ 0</span>
+                            <div class="d-flex flex-column gap-2 mt-2">
+                                <button id = "btnBuy" class = "btn btn-success">Realizar compra</button>
+                                <button id = "btnClearCart" class = "btn btn-danger">Vaciar carrito</button>
                             </div>
-    
-                            <div class = "cartCard">
-                                <div class="dataCard">
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-primary fw-bold">Producto</h5>
-                                        <span>Paracetamol</span>
-                                    </div>
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-dark fw-bold">Descripcion</h5>
-                                        <span>500mg</span>
-                                    </div>
-                                    <div class = "d-flex flex-column align-items-end">
-                                        <h5 class = "text-warning fw-bold">Cantidad</h5>
-                                        <span>12</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-end">
-                                        <h5 class = "text-success fw-bold">Precio</h5>
-                                        <span>$1000</span>
-                                    </div>
-                                </div>
-                                <div class = "cardControls">
-                                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                    <button class="btn btn-warning">-1</button>
-                                    <button class="btn btn-success">+1</button>
-                                </div>
-                            </div> -->
-    
                         </div>
-                        <!-- <div class = "d-flex justify-content-between mt-3" style = "justify-content: space-between;">
-                            <div class="cartControls">
-                                <button class="btn btn-success">Realizar compra</button>
-                                <button class="btn btn-danger">Vaciar carrito</button>
-                            </div>
-                            <span id = "total" class = "text-success fw-bold">$ 1000000</span>
-                        </div> -->
                     </div>
                 </div>
                 <% if (userType === "boss") { %>
