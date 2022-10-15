@@ -90,7 +90,7 @@ class Boss {
             .query("SELECT * FROM boss WHERE email = @email");
 
         return result.rowsAffected[0] == 1;
-    }    
+    }
 
     async userNameExist (userName) {
         let result = await this.pool.request()
@@ -98,7 +98,7 @@ class Boss {
             .query("SELECT * FROM boss WHERE userName = @userName");
 
         return result.rowsAffected[0] == 1;
-    }    
+    }
 
     async updateData (data) {
         

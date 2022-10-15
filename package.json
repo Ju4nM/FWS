@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "EcuipoDinamit4",
@@ -30,6 +31,7 @@
   },
   "homepage": "https://github.com/Ju4nM/FWS#readme",
   "devDependencies": {
+    "jest": "^29.1.2",
     "nodemon": "^2.0.19"
   }
 }
