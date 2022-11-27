@@ -1,3 +1,4 @@
+import Message from "../message.js";
 
 export default class ProductFinder {
 
@@ -17,6 +18,8 @@ export default class ProductFinder {
         this.lastId = 0;
 
         this.product = productObject;
+        this.message = new Message("message", "closeMsg");
+        
         this.#eventListeners();
     }
 
@@ -32,10 +35,13 @@ export default class ProductFinder {
             content.addEventListener("scroll", () => this.#eventForContent(content));
             this.lastId = 0;
             e.preventDefault();
-            if (!this.input.value == "") {
-                this.productsSearched.innerHTML = "";
-                this.#searchValue();
+            if (/^\s*$/.test(this.input.value)) {
+                this.message.showErrors([ "El campo de texto no puede estar vacio" ])
+                console.log(this.input.value.trim());
+                return;
             }
+            this.productsSearched.innerHTML = "";
+            this.#searchValue();
         }
 
         this.criteria.addEventListener("input", () => {
@@ -89,24 +95,30 @@ export default class ProductFinder {
             method: "POST",
             body: new URLSearchParams(bodyParams)
         })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw "Error" + response;
-            }
-        })
-        .then (res => {
-            
-            if (res.length > 0) {
-                this.renderProducts(res);
-                this.lastId = res[res.length - 1].productId;
-            } else {
-                this.spinner.setText("No se encontraron coincidencias");
-                this.spinner.showText();
-            }
-        })
-        .catch (error => console.log(error));
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw "Error" + response;
+                }
+            })
+            .then (res => {
+
+                if (res.errors) {
+                    this.message.showErrors(res.errors);
+                    this.endSearching.click();
+                    return;
+                }
+                
+                if (res.length > 0) {
+                    this.renderProducts(res);
+                    this.lastId = res[res.length - 1].productId;
+                } else {
+                    this.spinner.setText("No se encontraron coincidencias");
+                    this.spinner.showText();
+                }
+            })
+            .catch (error => console.log(error));
     }
     
     renderProducts (dataProducts) {

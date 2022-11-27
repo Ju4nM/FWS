@@ -76,7 +76,7 @@ export default class Validation {
     productName (name) {
         if (name.length === 0) {
             this.errors.push("El nombre del producto esta vacio");
-        } else if (!/\w/.test(name)) {
+        } else if (!/^[A-Za-z0-9\s]+$/.test(name)) {
             this.errors.push("Solo carateres alfanumericos en el nombre");
         }
     }
@@ -84,7 +84,7 @@ export default class Validation {
     productDescription (description) {
         if (description.length === 0) {
             this.errors.push("La descripcion esta vacia");
-        } else if (!/\w/.test(description)) {
+        } else if (!/^[A-Za-z0-9\s]+$/.test(description)) {
             this.errors.push("Solo caracteres alfanumericos en la descripcion");
         }
     }
@@ -92,7 +92,7 @@ export default class Validation {
     productSolutions (solutions) {
         if (solutions.length === 0) {
             this.errors.push("La solucion esta vacia");
-        } else if (!/\w/.test(solutions)) {
+        } else if (!/^[A-Za-z0-9\s]+$/.test(solutions)) {
             this.errors.push("Solo caracteres alfanumericos en las soluciones");
         }
     } 
@@ -119,5 +119,15 @@ export default class Validation {
         expirationDate = expirationDate.split(/-|\//).reverse().join("-");
         console.log(expirationDate);
         this.expirationDate(expirationDate);
+    }
+
+    // others
+    validateId (id) {
+        if (!/^[0-9]$/.test(id)) this.errors.push("El ID solo ser numerico");
+    }
+    
+    // validate the the data for search
+    validateSearchInput (input) {
+        if (!/^[A-Za-z0-9\s]+?$/.test(input)) this.errors.push("El termino de busqueda solo puede tener letras y/o numeros");
     }
 }
