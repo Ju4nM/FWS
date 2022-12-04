@@ -91,6 +91,8 @@ export default class ProductFinder {
 
         this.spinner.showSpinner();
         // this.productsSearched.innerHTML = "";
+        // NOTE: for debug
+        console.log(bodyParams);
         fetch("/dashboard/product/find", {
             method: "POST",
             body: new URLSearchParams(bodyParams)
@@ -103,7 +105,7 @@ export default class ProductFinder {
                 }
             })
             .then (res => {
-
+                console.log(res);
                 if (res.errors) {
                     this.message.showErrors(res.errors);
                     this.endSearching.click();
