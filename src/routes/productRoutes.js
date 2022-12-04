@@ -47,17 +47,25 @@ router.post("/product/find", async (req, res) => {
     const cookieAuth = new CookieAuth(req.cookies);
     const cookieIsExist = await cookieAuth.auth();
     
-    if (cookieIsExist) {
-        
-        let { valueToSearch, criteria, lastId, rowCount, biggerThan } = req.body;
-        const { userId } = cookieAuth.getData();
-
-        let foundProducts = await Product.searchProduct(userId, valueToSearch, criteria, lastId, rowCount, biggerThan);
-        res.json(foundProducts);
-    } else {
-
-        res.sendStatus(404);
+    if (!cookieIsExist) {
+        res.sendStatus(401);
+        return;
     }
+
+    let { valueToSearch, criteria, lastId, rowCount, biggerThan } = req.body;
+    
+    let validator = new Validation();
+    validator.validateSearchInput(valueToSearch);
+
+    if (!validator.isValid()) {
+        res.json({ errors: validator.getErrors() });
+        return;
+    }
+
+    const { userId } = cookieAuth.getData();
+
+    let foundProducts = await Product.searchProduct(userId, valueToSearch, criteria, lastId, rowCount, biggerThan);
+    res.json(foundProducts);
 });
 
 router.post("/product/delete", async (req, res) =>{
@@ -86,39 +94,41 @@ router.post("/product/add", async (req, res) => {
     const cookieAuth = new CookieAuth(req.cookies);
     const cookieIsExist = await cookieAuth.auth();
 
-    if (cookieIsExist) {
-        const cookieData = cookieAuth.getData();
-        let { userId, userType } = cookieData;
-        let validation = new Validation(userType);
-        let productData = {};
-        for (const key in req.body) productData[key] = req.body[key].trimEnd();
-        
-        let response = {status: false, msg: "Ha habido un error"};
-        validation.validateAllProductFields(productData);
-
-        if (validation.isValid()) {
-
-            let result;
-            if (userType == "boss") {
-                result = await Product.add({ ownerId: userId, ...productData });
-    
-            } else if (userType === "employee") {
-                let [ employeeData ] = await Employee.getEmployeeData(userId);
-                result = await Product.add({ ownerId: employeeData.bossId, employeeId: userId, ...productData });
-            }
-    
-            if (result.length === 1) {
-                response = {status: true, msg: "Se ha registrado correctamente", productData: result[0]};
-            } else {
-                response = {status: false, msg: "No se ha podido registrar"};
-            }
-    
-        } else {
-            response = {status: false, errors: validation.getErrors()};
-        }
-        
-        res.json(response);
+    if (!cookieIsExist) {
+        res.sendStatus(401);
+        return
     }
+    
+    const cookieData = cookieAuth.getData();
+    let { userId, userType } = cookieData;
+    let validation = new Validation(userType);
+    let productData = {};
+    for (const key in req.body) productData[key] = req.body[key].trim();
+
+    let response = {status: false, msg: "Ha habido un error"};
+    validation.validateAllProductFields(productData);
+
+    if (!validation.isValid()) {
+        res.json({ status: false, errors: validation.getErrors() });
+        return;
+    }
+    
+    let result;
+    if (userType == "boss") {
+        result = await Product.add({ ownerId: userId, ...productData });
+
+    } else if (userType === "employee") {
+        let [ employeeData ] = await Employee.getEmployeeData(userId);
+        result = await Product.add({ ownerId: employeeData.bossId, employeeId: userId, ...productData });
+    }
+
+    if (result.length === 1) {
+        response = {status: true, msg: "Se ha registrado correctamente", productData: result[0]};
+    } else {
+        response = {status: false, msg: "No se ha podido registrar"};
+    }
+
+    res.json(response);
 });
 
 router.get("/product/:id", async (req, res) => {

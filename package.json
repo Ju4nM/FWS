@@ -32,6 +32,7 @@
   "homepage": "https://github.com/Ju4nM/FWS#readme",
   "devDependencies": {
     "jest": "^29.1.2",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "supertest": "^6.3.2"
   }
 }

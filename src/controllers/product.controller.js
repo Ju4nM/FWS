@@ -1,4 +1,5 @@
 import getConnection from "../database/conection.js";
+
 class Product {
 
     constructor (pool) {

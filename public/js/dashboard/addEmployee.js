@@ -37,7 +37,11 @@ export default class AddEmployee {
                     console.log(res.employeeData);
                     this.showNewEmployee(res.employeeData);
                 } else {
-                    this.message.show(res.msg);
+                    if (res.errors) {
+                        console.log("errores");
+                        this.message.showErrors(res.errors);
+                    }
+                    else this.message.show(res.msg);
                 }
             })
             .catch(error => console.log(error));
