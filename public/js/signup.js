@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).then(response => {
             
             if (response.status) {
-                message.show(response.response);
+                message.show(response.response, () => location.href = "/login");
             } else {
 
                 message.showErrors(response.response);

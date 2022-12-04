@@ -145,6 +145,8 @@ class Employee {
     async addEmployee (employeeId, bossId) {
         
         let employeeData = await this.getEmployeeData(employeeId);
+
+        if (employeeData.length == 0) return [];
         if (employeeData[0].bossId != null) return [];
 
         const added = await this.pool.request()

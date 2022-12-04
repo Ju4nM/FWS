@@ -1,6 +1,7 @@
 import express from 'express';
 import CookieAuth from "../utils/cookieAuth.js";
 import Employee from "../controllers/employee.controller.js";
+import Validation from '../utils/fieldValidation.js';
 
 const router = express.Router();
 
@@ -53,28 +54,41 @@ router.post("/addEmployee", async (req, res) => {
     const cookieAuth = new CookieAuth(req.cookies);
     const cookieIsExist = await cookieAuth.auth();
 
-    if(cookieIsExist) {
-        const cookieData = cookieAuth.getData();
-        let { employeeId } = req.body;
-        let { userType, userId } = cookieData;
-        employeeId = employeeId.trim();
-        
-        if (employeeId === "") {
-            res.json({status: false, msg: "El id esta vacio"});
-        } else {
+    if(!cookieIsExist) {
+        res.sendStatus(401);
+        return;
+    }
+    
+    const cookieData = cookieAuth.getData();
+    let { employeeId } = req.body;
+    let { userType, userId } = cookieData;
+    employeeId = employeeId.trim();
 
-            if (userType === "boss") {
-                let result = await Employee.addEmployee(employeeId, userId);
-                
-                if (result.length === 1) {
-                    res.json({status: true, msg: "Se ha acoplado correctamente", employeeData: result[0]});
-                } else {
-                    res.json({status: false, msg: "No se pudo acoplar el empleado"})
-                }
-            } else {
-                res.sendStatus(404);
-            }
-        }
+    if (employeeId === "") {
+        res.json({status: false, msg: "El id esta vacio"});
+        return;
+    }
+
+    if (!userType === "boss") {
+        res.sendStatus(401);
+        return;
+    }
+
+    let validator = new Validation();
+    validator.validateId(employeeId);
+
+    if (!validator.isValid()) {
+        console.log(validator.getErrors());
+        res.json({ status: false, errors: validator.getErrors() });
+        return;
+    }
+
+    let result = await Employee.addEmployee(employeeId, userId);
+
+    if (result.length === 1) {
+        res.json({status: true, msg: "Se ha acoplado correctamente", employeeData: result[0]});
+    } else {
+        res.json({status: false, msg: "No se pudo acoplar el empleado"});
     }
 });
 

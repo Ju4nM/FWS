@@ -17,12 +17,12 @@ export default class CookieAuth {
         const result = await pool.request()
             .input("sessid", this.sessid)
             .query(`SELECT * FROM ${table} WHERE sessid LIKE @sessid`);
-    
+        
         return result; 
     }
     
     async auth () {
-    
+        
         if (this.sessid == undefined) return false;
         
         let data;
